@@ -8,8 +8,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.engames.R
 import com.example.engames.databinding.ActivityMainBinding
+import com.example.engames.presentation.base.activity.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(0, systemBars.top, 0, systemBars.bottom)
+            view.setPadding(0, systemBars.top, 0, 0)
             insets
         }
     }

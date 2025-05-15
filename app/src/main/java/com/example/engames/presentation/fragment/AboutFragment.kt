@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.engames.R
+import com.example.engames.databinding.FragmentAboutBinding
+import com.example.engames.presentation.base.fragment.BaseFragment
 
-class AboutFragment : Fragment() {
+class AboutFragment : BaseFragment<FragmentAboutBinding>(
+    FragmentAboutBinding::inflate
+) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_about, container, false)
-    }
 }

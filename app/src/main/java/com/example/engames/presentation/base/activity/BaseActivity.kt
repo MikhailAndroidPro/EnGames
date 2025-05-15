@@ -1,0 +1,53 @@
+package com.example.engames.presentation.base.activity
+
+import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.domain.utils.ActionHolder.ActionHolder.getActionId
+import com.example.domain.utils.ActionHolder.ActionHolder.setActionId
+import com.example.engames.app.App
+import java.util.Locale
+
+abstract class BaseActivity : AppCompatActivity() {
+    fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setSettings()
+    }
+
+    open fun navigate(action: Int) {}
+    override fun onBackPressed() {
+        val actionId = getActionId()
+        if (actionId != -1) {
+            setActionId(-1)
+            try {
+                navigate(actionId)
+            }
+            catch (e: Exception){
+                super.onBackPressed()
+            }
+        } else super.onBackPressed()
+    }
+
+    private fun setSettings() {
+        if (App.sharedManager.isThemeChanged()) {
+            App.settingsManager.setCurrentTheme()
+        }
+        setLanguage(App.settingsManager.getCurrentLanguage(), true)
+    }
+    open fun setLanguage(languageCode: String, isLaunch: Boolean = false) {
+        App.sharedManager.saveLanguagePreference(languageCode)
+        updateResources(languageCode, isLaunch)
+    }
+    private fun updateResources(languageCode: String, isLaunch: Boolean) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        if (!isLaunch) this.recreate()
+    }
+}

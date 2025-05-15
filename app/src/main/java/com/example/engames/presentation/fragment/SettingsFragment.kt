@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.engames.R
+import com.example.engames.databinding.FragmentSettingsBinding
+import com.example.engames.presentation.base.fragment.BaseFragment
 
-class SettingsFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
+    FragmentSettingsBinding::inflate
+) {
 }
