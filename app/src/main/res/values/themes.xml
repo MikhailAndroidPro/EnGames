@@ -19,6 +19,17 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="BottomNavStyle" parent="Theme.EnGames">
+        <item name="android:background">@color/red</item>
+        <item name="itemIconTint">@color/nav_item_color</item>
+        <item name="itemActiveIndicatorStyle">@style/BottomNavigationView.ActiveIndicator</item>
+        <item name="itemTextColor">@color/white</item>
+    </style>
+
+    <style name="BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/secondaryColor</item>
+    </style>
+
     <style name="SecondaryText" parent="Theme.EnGames">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
