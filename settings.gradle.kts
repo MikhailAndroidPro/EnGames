@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "EnGames"
 include(":app")
+include(":domain")

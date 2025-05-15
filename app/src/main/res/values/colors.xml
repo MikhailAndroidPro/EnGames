@@ -16,5 +16,5 @@
     <color name="alternativeMain">#FFFAFAFA</color>
     <color name="alternativeSecond">#FF1F1F1F</color>
     <color name="alternativeHint">#B42C2C2C</color>
-    <color name="alternativeBgShape">#B4FAFAFA</color>
+    <color name="alternativeBgShape">#FFFAFAFA</color>
 </resources>

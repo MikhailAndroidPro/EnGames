@@ -1,4 +1,6 @@
 package com.example.engames.app
 
-class App {
+import android.app.Application
+
+class App : Application() {
 }

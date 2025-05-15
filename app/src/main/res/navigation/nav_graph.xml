@@ -1,6 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
 
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.engames.presentation.fragment.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_aboutFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_aboutFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_aboutFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.engames.presentation.fragment.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_authFragment_to_regFragment"
+            app:destination="@id/regFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.example.engames.presentation.fragment.GamesFragment"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games" >
+        <action
+            android:id="@+id/action_gamesFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.engames.presentation.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/regFragment"
+        android:name="com.example.engames.presentation.fragment.RegFragment"
+        android:label="fragment_reg"
+        tools:layout="@layout/fragment_reg" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.engames.presentation.fragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settingsFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settingsFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="com.example.engames.presentation.fragment.StatisticFragment"
+        android:label="fragment_statistic"
+        tools:layout="@layout/fragment_statistic" >
+        <action
+            android:id="@+id/action_statisticFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_statisticFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_statisticFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_statisticFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.engames.presentation.fragment.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_splashFragment_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
