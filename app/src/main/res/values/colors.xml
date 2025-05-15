@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="red">#FFEC3F2B</color>
+    <color name="blue">#FF008CFF</color>
+    <color name="pink">#FFFF00BF</color>
+    <color name="yellow">#FFE6B521</color>
+
+    <color name="mainColor">#FF1F1F1F</color>
+    <color name="secondaryColor">#FFFAFAFA</color>
+    <color name="bgShapeColor">#FF2C2C2C</color>
+    <color name="hintColor">#B4FAFAFA</color>
+
+    <color name="alternativeMain">#FFFAFAFA</color>
+    <color name="alternativeSecond">#FF1F1F1F</color>
+    <color name="alternativeHint">#B42C2C2C</color>
+    <color name="alternativeBgShape">#B4FAFAFA</color>
 </resources>
