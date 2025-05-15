@@ -1,6 +1,7 @@
 package com.example.engames.presentation.base.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.domain.utils.ActionHolder.ActionHolder.getActionId
@@ -9,6 +10,9 @@ import com.example.engames.app.App
 import java.util.Locale
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    private lateinit var navView: View
+
     fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -17,7 +21,12 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setSettings()
     }
-
+    fun showNavigationView(){
+        navView.visibility = View.VISIBLE
+    }
+    fun hideNavigationView(){
+        navView.visibility = View.GONE
+    }
     open fun navigate(action: Int) {}
     override fun onBackPressed() {
         val actionId = getActionId()
@@ -49,5 +58,8 @@ abstract class BaseActivity : AppCompatActivity() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
         if (!isLaunch) this.recreate()
+    }
+    protected fun pinNavView(view: View){
+        navView = view
     }
 }

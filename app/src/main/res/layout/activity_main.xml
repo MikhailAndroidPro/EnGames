@@ -34,6 +34,7 @@
         style="@style/BottomNavStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,13 @@
 package com.example.engames.presentation.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
 import com.example.engames.R
 import com.example.engames.databinding.ActivityMainBinding
 import com.example.engames.presentation.base.activity.BaseActivity
@@ -23,5 +25,10 @@ class MainActivity : BaseActivity() {
             view.setPadding(0, systemBars.top, 0, 0)
             insets
         }
+        pinNavView(binding.bottomNavigation)
+    }
+    override fun navigate(action: Int) {
+        super.navigate(action)
+        binding.navMainFragment.findNavController().navigate(action)
     }
 }
