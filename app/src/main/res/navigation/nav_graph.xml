@@ -41,30 +41,11 @@
             app:destination="@id/regFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gamesFragment"
+        android:id="@+id/gameVictorineFragment"
         android:name="com.example.engames.presentation.fragment.GameVictorineFragment"
-        android:label="fragment_games"
-        tools:layout="@layout/fragment_games" >
-        <action
-            android:id="@+id/action_gamesFragment_to_profileFragment"
-            app:destination="@id/profileFragment"
-            app:popUpTo="@navigation/nav_graph"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_gamesFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:popUpTo="@navigation/nav_graph"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_gamesFragment_to_statisticFragment"
-            app:destination="@id/statisticFragment"
-            app:popUpTo="@navigation/nav_graph"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_gamesFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment"
-            app:popUpTo="@navigation/nav_graph"
-            app:popUpToInclusive="true" />
+        android:label="fragment_game_victorine"
+        tools:layout="@layout/fragment_game_victorine" >
+
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -169,5 +150,58 @@
             app:destination="@id/gamesFragment"
             app:popUpTo="@navigation/nav_graph"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/gameChoiceFragment"
+        android:name="com.example.engames.presentation.fragment.GameChoiceFragment"
+        android:label="fragment_game_choice"
+        tools:layout="@layout/fragment_game_choice" />
+    <fragment
+        android:id="@+id/gameConnectFragment"
+        android:name="com.example.engames.presentation.fragment.GameConnectFragment"
+        android:label="fragment_game_connect"
+        tools:layout="@layout/fragment_game_connect" />
+    <fragment
+        android:id="@+id/gameEnterFragment"
+        android:name="com.example.engames.presentation.fragment.GameEnterFragment"
+        android:label="fragment_game_enter"
+        tools:layout="@layout/fragment_game_enter" />
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.example.engames.presentation.fragment.GamesFragment"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games" >
+        <action
+            android:id="@+id/action_gamesFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popUpTo="@navigation/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_gamesFragment_to_gameVictorineFragment"
+            app:destination="@id/gameVictorineFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_gameChoiceFragment"
+            app:destination="@id/gameChoiceFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_gameConnectFragment"
+            app:destination="@id/gameConnectFragment" />
+        <action
+            android:id="@+id/action_gamesFragment_to_gameEnterFragment"
+            app:destination="@id/gameEnterFragment" />
     </fragment>
 </navigation>

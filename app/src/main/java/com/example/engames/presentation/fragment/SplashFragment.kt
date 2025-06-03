@@ -16,7 +16,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(
 ) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity().hideNavigationView()
 
         if (App.sharedManager.checkLogIn()){
             findNavController().navigate(R.id.action_splashFragment_to_gamesFragment)

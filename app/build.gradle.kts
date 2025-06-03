@@ -55,4 +55,11 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.glide)
     implementation(project(":domain"))
+
+//    implementation(libs.bom)
+//    implementation(libs.postgrest.kt)
+//    implementation(libs.gotrue.kt)
+//    implementation(libs.storage.kt)
+//    implementation(libs.realtime.kt)
+//    implementation(libs.ktor.client.okhttp)
 }

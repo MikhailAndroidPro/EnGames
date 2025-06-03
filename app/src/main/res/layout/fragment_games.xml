@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragment.GameVictorineFragment">
+    tools:context=".presentation.fragment.GamesFragment">
 
 </FrameLayout>
