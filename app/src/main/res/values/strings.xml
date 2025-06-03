@@ -7,4 +7,7 @@
     <string name="settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="auth_title">Log In</string>
+    <string name="auth_subtitle">klsjkjvkljfdnvkjdfnvkjdfnvkjdfnv.kjn.k d jdkjn jdn jdn kjdnbfk</string>
+    <string name="email">Email</string>
 </resources>

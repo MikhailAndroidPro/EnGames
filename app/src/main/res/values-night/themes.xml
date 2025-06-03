@@ -6,19 +6,12 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="RecyclerBase" parent="Theme.EnGames">
-        <item name="android:fadingEdgeLength">32dp</item>
-        <item name="android:requiresFadingEdge">vertical</item>
-    </style>
-
-    <style name="TitleText" parent="Theme.EnGames">
-        <item name="android:textSize">36sp</item>
-        <item name="android:textColor">@color/red</item>
+    <style name="EditTextStyle" parent="Theme.EnGames">
+        <item name="android:background">@drawable/edit_text_background_dark</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:textColorHint">@color/hintColor</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="SecondaryText" parent="Theme.EnGames">
         <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 </resources>

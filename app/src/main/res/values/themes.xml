@@ -8,6 +8,15 @@
 
     <style name="Theme.EnGames" parent="Base.Theme.EnGames" />
 
+    <style name="EditTextStyle" parent="Theme.EnGames">
+        <item name="android:background">@drawable/edit_text_background_light</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:textColorHint">@color/alternativeHint</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="RecyclerBase" parent="Theme.EnGames">
         <item name="android:fadingEdgeLength">32dp</item>
         <item name="android:requiresFadingEdge">vertical</item>
@@ -16,6 +25,11 @@
     <style name="TitleText" parent="Theme.EnGames">
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">@color/red</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubTitleText" parent="Theme.EnGames">
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -28,10 +42,5 @@
 
     <style name="BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/secondaryColor</item>
-    </style>
-
-    <style name="SecondaryText" parent="Theme.EnGames">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 </resources>
