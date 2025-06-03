@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/gamesFragment"
-        android:name="com.example.engames.presentation.fragment.GamesFragment"
+        android:name="com.example.engames.presentation.fragment.GameVictorineFragment"
         android:label="fragment_games"
         tools:layout="@layout/fragment_games" >
         <action
