@@ -17,7 +17,6 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity().showNavigationView()
         viewModel.loadGames()
         setRecyclerLayoutManager()
     }

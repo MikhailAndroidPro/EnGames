@@ -14,10 +14,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
     FragmentAuthBinding::inflate
 ) {
     private var isPasswordHidden = true
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity().hideNavigationView()
-    }
+
     override fun applyClick() {
         super.applyClick()
         with(binding) {

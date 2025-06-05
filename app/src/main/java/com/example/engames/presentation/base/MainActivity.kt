@@ -25,6 +25,6 @@ class MainActivity : BaseActivity() {
             view.setPadding(0, systemBars.top, 0, 0)
             insets
         }
-        pinNavView(binding.bottomNavigation)
+        pinNavView(R.id.nav_main_fragment, R.id.bottomNavigation, binding.bottomNavigation)
     }
 }

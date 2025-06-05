@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.engames.R
 import com.example.engames.app.App
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Locale
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    private lateinit var navView: View
+    private lateinit var navController: NavController
 
     fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -18,12 +23,6 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSettings()
-    }
-    fun showNavigationView(){
-        navView.visibility = View.VISIBLE
-    }
-    fun hideNavigationView(){
-        navView.visibility = View.GONE
     }
 
     private fun setSettings() {
@@ -44,7 +43,22 @@ abstract class BaseActivity : AppCompatActivity() {
         resources.updateConfiguration(config, resources.displayMetrics)
         if (!isLaunch) this.recreate()
     }
-    protected fun pinNavView(view: View){
-        navView = view
+    protected fun pinNavView(idHost: Int, idNavigation: Int, view: View){
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(idHost) as NavHostFragment
+        navController = navHostFragment.navController
+        val bottomNavigation = findViewById<BottomNavigationView>(idNavigation)
+        bottomNavigation.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.splashFragment, R.id.authFragment, R.id.regFragment -> {
+                    view.visibility = View.GONE
+                }
+                else -> {
+                    view.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

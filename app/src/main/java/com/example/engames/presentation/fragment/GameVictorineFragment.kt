@@ -8,8 +8,5 @@ import com.example.engames.presentation.base.fragment.BaseFragment
 class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
     FragmentGameVictorineBinding::inflate
 ) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        activity().showNavigationView()
-    }
+
 }
