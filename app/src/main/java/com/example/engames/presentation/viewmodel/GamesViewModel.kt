@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 class GamesViewModel : BaseViewModel() {
     private val _listGames = MutableLiveData<ArrayList<GameModel>>(arrayListOf())
     val listGames: LiveData<ArrayList<GameModel>> get() = _listGames
-    var isTaskReady: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
     fun loadGames() {
         viewModelScope.launch {

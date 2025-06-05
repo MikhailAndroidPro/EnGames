@@ -35,5 +35,9 @@
     <string name="write_us">Write Us!</string>
     <string name="creator_email">mailto:mihail.mozohin@tatar.ru</string>
     <string name="engames_issue">EnGames issue</string>
+    <string name="gender">Gender</string>
+    <string name="base_gender">Male</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="new_password">New password</string>
 
 </resources>
