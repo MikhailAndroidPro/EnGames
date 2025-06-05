@@ -89,6 +89,7 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
 
         if (checkData()){
             createUser()
+            findNavController().popBackStack()
         }
     }
 
