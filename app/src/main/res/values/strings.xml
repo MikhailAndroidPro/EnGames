@@ -40,10 +40,14 @@
     <string name="save_changes">Save Changes</string>
     <string name="new_password">New password</string>
     <string name="theme">Theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
     <string name="language">Language</string>
     <string name="rate_us">Rate us in RuStore</string>
     <string name="share_link">Share link with friends</string>
     <string name="delete_account">Delete Account</string>
     <string name="log_out">Log Out</string>
+    <string name="ru">RU</string>
+    <string name="en">EN</string>
 
 </resources>

@@ -26,15 +26,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/themeSwitch"
+    <com.github.angads25.toggle.widget.LabeledSwitch
+        android:id="@+id/switchTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="8dp"
-        android:textAlignment="center"
+        android:textSize="14sp"
+        app:colorBorder="@color/red"
+        app:textOn="@string/dark"
+        app:textOff="@string/light"
+        app:colorOn="@color/cardview_light_background"
+        app:colorOff="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="@+id/themeTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/themeTxt" />
+        app:layout_constraintTop_toTopOf="@+id/themeTxt"
+        app:on="false" />
 
     <TextView
         android:id="@+id/languageTxt"
@@ -46,15 +51,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/themeTxt" />
 
-    <com.google.android.material.materialswitch.MaterialSwitch
+    <com.github.angads25.toggle.widget.LabeledSwitch
         android:id="@+id/languageSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="8dp"
-        android:textAlignment="center"
+        android:textSize="14sp"
+        app:colorBorder="@color/red"
+        app:colorOff="@color/cardview_dark_background"
+        app:colorOn="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="@+id/languageTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/languageTxt" />
+        app:layout_constraintTop_toTopOf="@+id/languageTxt"
+        app:on="false"
+        app:textOff="@string/en"
+        app:textOn="@string/ru" />
 
     <ImageView
         android:id="@+id/shareImg"
@@ -70,8 +80,8 @@
         style="@style/SubTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rate_us"
         android:layout_marginTop="8dp"
+        android:text="@string/rate_us"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shareImg" />
 
@@ -80,8 +90,8 @@
         style="@style/SubTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/share_link"
         android:layout_marginTop="8dp"
+        android:text="@string/share_link"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rateUsTxt" />
 
@@ -90,9 +100,9 @@
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginVertical="24dp"
         android:text="@string/delete_account"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="24dp" />
 
@@ -101,9 +111,9 @@
         style="@style/LogoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginVertical="12dp"
         android:text="@string/log_out"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@id/deleteAccountBtn"
         tools:layout_editor_absoluteX="24dp" />
 

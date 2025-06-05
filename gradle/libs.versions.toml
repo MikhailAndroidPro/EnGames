@@ -25,6 +25,7 @@ navigationFragmentKtx = "2.9.0"
 navigationUiKtx = "2.9.0"
 rxandroid = "2.1.1"
 rxjava = "2.2.11"
+toggle = "1.1.0"
 
 [libraries]
 adapter-rxjava2 = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "adapterRxjava2" }
@@ -57,6 +58,7 @@ rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
 storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt" }
 supabase-postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "authKt" }
 switchbutton-library = { module = "com.kyleduo.switchbutton:library", version.ref = "libraryVersion" }
+toggle = { module = "com.github.angads25:toggle", version.ref = "toggle" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

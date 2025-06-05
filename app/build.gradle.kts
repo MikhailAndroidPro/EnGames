@@ -63,4 +63,5 @@ dependencies {
     implementation(libs.realtime.kt)
     implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.logging)
+    implementation (libs.toggle)
 }
