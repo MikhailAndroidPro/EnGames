@@ -12,7 +12,10 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="auth_butt_text">Sign In</string>
+    <string name="reg_title">Sign Up now!</string>
+    <string name="reg_subtitle">When you register in this app\nyou gives us full rights to make\nyour process of learning English very interesting</string>
     <string name="register_butt_text">Sign Up</string>
+    <string name="privacy_policy">I agree that my data will be used to improve my gaming experience</string>
     <string name="repeat_password">Repeat password</string>
     <string name="no_account_title">Don`t have account?</string>
     <string name="yes_account_title">Have account?</string>
