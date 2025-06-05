@@ -3,7 +3,9 @@ package com.example.engames.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.engames.R
 import com.example.engames.databinding.FragmentGamesBinding
 import com.example.engames.interfaces.IRecyclerFragment
 import com.example.engames.presentation.adapter.GamesAdapter
@@ -19,6 +21,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadGames()
         setRecyclerLayoutManager()
+        findNavController().navigate(R.id.action_gamesFragment_to_gameChoiceFragment)
     }
 
     override fun setObservers() {
