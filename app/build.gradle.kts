@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "1.9.22"
-    id("kotlin-parcelize")
 }
 
 android {
@@ -29,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         viewBinding = true
@@ -58,11 +57,9 @@ dependencies {
     implementation(libs.glide)
     implementation(project(":domain"))
 
-    implementation(platform("io.github.jan-tennert.supabase:bom:2.3.1"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-//    implementation(libs.bom)
-//    implementation(libs.postgrest.kt)
-//    implementation(libs.gotrue.kt)
+    implementation(platform(libs.bom))
+    implementation(libs.postgrest.kt)
+    implementation(libs.gotrue.kt)
     implementation(libs.storage.kt)
     implementation(libs.realtime.kt)
     implementation(libs.ktor.client.okhttp)
