@@ -42,7 +42,7 @@
         <action
             android:id="@+id/action_authFragment_to_gamesFragment"
             app:destination="@id/gamesFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/authFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -148,12 +148,12 @@
         <action
             android:id="@+id/action_splashFragment_to_authFragment"
             app:destination="@id/authFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_splashFragment_to_gamesFragment"
             app:destination="@id/gamesFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment

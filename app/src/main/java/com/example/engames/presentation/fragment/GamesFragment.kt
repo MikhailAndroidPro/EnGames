@@ -12,4 +12,8 @@ import com.example.engames.presentation.base.fragment.BaseFragment
 class GamesFragment : BaseFragment<FragmentGamesBinding>(
     FragmentGamesBinding::inflate
 ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity().showNavigationView()
+    }
 }
