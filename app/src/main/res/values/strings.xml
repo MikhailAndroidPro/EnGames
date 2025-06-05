@@ -39,5 +39,10 @@
     <string name="base_gender">Male</string>
     <string name="save_changes">Save Changes</string>
     <string name="new_password">New password</string>
+    <string name="theme">Theme</string>
+    <string name="language">Language</string>
+    <string name="rate_us">Rate us in RuStore</string>
+    <string name="share_link">Share link with friends</string>
+    <string name="delete_account">Delete Account</string>
 
 </resources>
