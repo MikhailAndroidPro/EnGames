@@ -42,7 +42,7 @@
         <action
             android:id="@+id/action_authFragment_to_gamesFragment"
             app:destination="@id/gamesFragment"
-            app:popUpTo="@id/authFragment"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -91,7 +91,7 @@
         <action
             android:id="@+id/action_settingsFragment_to_authFragment"
             app:destination="@id/authFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_settingsFragment_to_statisticFragment"
@@ -179,22 +179,22 @@
         <action
             android:id="@+id/action_gamesFragment_to_profileFragment"
             app:destination="@id/profileFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_gamesFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_gamesFragment_to_statisticFragment"
             app:destination="@id/statisticFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_gamesFragment_to_aboutFragment"
             app:destination="@id/aboutFragment"
-            app:popUpTo="@navigation/nav_graph"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_gamesFragment_to_gameVictorineFragment"
