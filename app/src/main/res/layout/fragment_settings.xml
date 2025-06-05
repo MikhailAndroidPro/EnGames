@@ -28,9 +28,9 @@
 
     <com.github.angads25.toggle.widget.LabeledSwitch
         android:id="@+id/switchTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:textSize="16sp"
         app:colorBorder="@color/red"
         app:textOn="@string/dark"
         app:textOff="@string/light"
@@ -53,9 +53,9 @@
 
     <com.github.angads25.toggle.widget.LabeledSwitch
         android:id="@+id/languageSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:layout_width="96dp"
+        android:layout_height="40dp"
+        android:textSize="16sp"
         app:colorBorder="@color/red"
         app:colorOff="@color/cardview_dark_background"
         app:colorOn="@color/cardview_light_background"
