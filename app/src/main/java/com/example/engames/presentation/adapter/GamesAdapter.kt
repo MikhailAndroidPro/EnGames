@@ -12,6 +12,7 @@ class GamesAdapter(
 ) : BaseRecyclerAdapter<GameModel, GameViewBinding>(list, GameViewBinding::inflate) {
 
     override fun onBind(binding: GameViewBinding, item: GameModel) {
-
+        binding.name.text = item.name
+        binding.description.text = item.description
     }
 }

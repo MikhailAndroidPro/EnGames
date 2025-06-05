@@ -13,7 +13,7 @@ import com.example.engames.presentation.viewmodel.GamesViewModel
 class GamesFragment : BaseFragment<FragmentGamesBinding>(
     FragmentGamesBinding::inflate
 ), IRecyclerFragment {
-    private val viewModel: GamesViewModel by viewModels()
+    override val viewModel: GamesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +28,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
             if (isReady == true) {
                 viewModel.listGames.observe(viewLifecycleOwner) { games ->
                     if (!games.isNullOrEmpty()) {
-
+                        setRecyclerViewAdapter()
                     }
                 }
                 viewModel.isTaskReady.value = false
@@ -36,7 +36,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
         }
     }
     override fun setRecyclerViewAdapter() {
-        binding.rvGames.adapter = GamesAdapter()
+        binding.rvGames.adapter = GamesAdapter(listOf())
     }
     override fun setRecyclerLayoutManager() {
         binding.rvGames.layoutManager = LinearLayoutManager(context())

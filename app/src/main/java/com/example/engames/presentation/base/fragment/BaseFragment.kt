@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.example.engames.presentation.base.BaseViewModel
 import com.example.engames.presentation.base.activity.BaseActivity
 
 abstract class BaseFragment<VB : ViewBinding>(
@@ -18,6 +19,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 ) : Fragment() {
     private var _binding: VB? = null
     protected val binding get() = _binding!!
+    protected open val viewModel: BaseViewModel? = null
     protected fun context(): Context = requireContext()
     protected fun activity(): BaseActivity = requireActivity() as BaseActivity
 
@@ -31,6 +33,7 @@ abstract class BaseFragment<VB : ViewBinding>(
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel?.resumeState()
         applyClick()
         setObservers()
     }

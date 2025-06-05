@@ -43,13 +43,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.auth.kt)
-    implementation(libs.supabase.postgrest.kt)
     implementation(libs.gson)
-    implementation(libs.retrofit2.converter.gson)
-    implementation(libs.adapter.rxjava2)
-    implementation(libs.rxandroid)
-    implementation(libs.rxjava)
-    implementation(libs.ktor.client.android)
     implementation(libs.kotlin.stdlib.common)
 }
