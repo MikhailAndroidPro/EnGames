@@ -19,9 +19,9 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
         binding.signInText.setOnClickListener{
             findNavController().popBackStack()
         }
-        binding.signUpButton.setOnClickListener({ v ->
+        binding.signUpButton.setOnClickListener{
             registerUser()
-        })
+        }
         binding.eyeBtnPassword.setOnClickListener {
             isPasswordHidden = !isPasswordHidden
             binding.eyeBtnPassword.setImageResource(
