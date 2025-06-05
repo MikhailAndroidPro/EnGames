@@ -1,17 +1,10 @@
 <resources>
     <string name="app_name">EnGames</string>
-    <string name="games">Games</string>
-    <string name="statistic">Statistic</string>
-    <string name="about">About</string>
-    <string name="profile">Profile</string>
-    <string name="settings">Settings</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="auth_title">Sign In</string>
     <string name="auth_subtitle">Welcome to the best English learning app in whole world!</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
-    <string name="auth_butt_text">Sign In</string>
     <string name="reg_title">Sign Up now!</string>
     <string name="reg_subtitle">When you register in this app\nyou gives us full rights to make\nyour process of learning English very interesting</string>
     <string name="register_butt_text">Sign Up</string>
@@ -20,11 +13,11 @@
     <string name="no_account_title">Don`t have account?</string>
     <string name="yes_account_title">Have account?</string>
     <string name="auth_checkbox_text">Remember me</string>
-    <string name="incorrect_email">Некорректный email</string>
-    <string name="password_length_require">Пароль должен быть не меньше 6ти символов</string>
-    <string name="password_mismatch">Пароли не совпадают</string>
-    <string name="username_length_require">Имя пользователя должно быть не меньше 4х символов</string>
-    <string name="privacy_agreement">Согласитесь с условиями использования</string>
+    <string name="incorrect_email">Incorrect email</string>
+    <string name="password_length_require">The password must be at least 6 characters long.</string>
+    <string name="password_mismatch">The passwords do not match</string>
+    <string name="username_length_require">Username must be at least 4 characters long</string>
+    <string name="privacy_agreement">Agree with using conditions</string>
     <string name="games_title">Games</string>
     <string name="profile_title">Profile</string>
     <string name="about_title">About this app</string>
@@ -49,5 +42,6 @@
     <string name="log_out">Log Out</string>
     <string name="ru">RU</string>
     <string name="en">EN</string>
-
+    <string name="ru_ru">ru-RU</string>
+    <string name="en_en">en-EN</string>
 </resources>

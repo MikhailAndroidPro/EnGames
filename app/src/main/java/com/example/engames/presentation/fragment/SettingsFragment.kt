@@ -1,11 +1,14 @@
 package com.example.engames.presentation.fragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
+import com.example.domain.models.enums.ThemeMode
 import com.example.engames.R
 import com.example.engames.app.App
 import com.example.engames.databinding.FragmentSettingsBinding
@@ -16,6 +19,10 @@ import com.github.angads25.toggle.model.ToggleableView
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     FragmentSettingsBinding::inflate
 ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupView()
+        super.onViewCreated(view, savedInstanceState)
+    }
     override fun applyClick() {
         super.applyClick()
         with(binding) {
@@ -27,12 +34,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             }
             languageSwitch.setOnToggledListener(object : OnToggledListener {
                 override fun onSwitched(toggleableView: ToggleableView?, isOn: Boolean) {
-                    changeLanguage()
+                    if (isOn) setRussian() else setEnglish()
                 }
             })
             switchTheme.setOnToggledListener(object : OnToggledListener {
                 override fun onSwitched(toggleableView: ToggleableView?, isOn: Boolean) {
-                    changeTheme()
+                    if (isOn) setDarkTheme() else setLightTheme()
                 }
             })
         }
@@ -41,13 +48,41 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         App.sharedManager.logOut()
         findNavController().popBackStack(R.id.authFragment, true)
     }
+    private fun setupView(){
+        with(binding) {
+            when (App.settingsManager.getCurrentTheme()) {
+                ThemeMode.DARK -> switchTheme.isOn = true
+                ThemeMode.LIGHT -> switchTheme.isOn = false
+            }
+        }
+    }
     private fun deleteAccount(){
 
     }
-    private fun changeTheme(){
 
+    private fun setRussian(){
+        activity().setLanguage(resources.getString(R.string.en))
     }
-    private fun changeLanguage(){
+    private fun setEnglish() {
+        activity().setLanguage(resources.getString(R.string.en))
+    }
+    private fun setDarkTheme() {
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                App.settingsManager.setTheme(ThemeMode.DARK)
+            }
+        }
+    }
 
+    private fun setLightTheme() {
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                App.settingsManager.setTheme(ThemeMode.LIGHT)
+            }
+        }
     }
 }
