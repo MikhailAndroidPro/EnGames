@@ -33,5 +33,7 @@
     <string name="about_info">Learn a Language with Fun and Ease!\nStep into an exciting world of learning where every task feels like a game, and every achievement brings you closer to fluency.\n\nNo More Boring Lessons\nSay goodbye to dry grammar drills. Our app turns language learning into an engaging adventure with levels, points, rewards, and surprises.\n\nPerfect for All Skill Levels\nFrom complete beginners to confident users — you progress step by step with clear tasks and helpful support.\n\nLearn Anytime, Anywhere\nOur gamified system keeps you motivated. Study on the go, during breaks, or while relaxing at home.</string>
     <string name="have_something_to_say">Have something to say?</string>
     <string name="write_us">Write Us!</string>
+    <string name="creator_email">mailto:mihail.mozohin@tatar.ru</string>
+    <string name="engames_issue">EnGames issue</string>
 
 </resources>
