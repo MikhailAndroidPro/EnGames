@@ -1,11 +1,13 @@
 package com.example.engames.presentation.fragment
 
 import android.text.method.PasswordTransformationMethod
+import android.util.Patterns
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.engames.R
-import com.example.engames.app.App
 import com.example.engames.databinding.FragmentRegBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
+import kotlin.compareTo
 
 
 class RegFragment : BaseFragment<FragmentRegBinding>(
@@ -44,6 +46,50 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
     }
 
     private fun registerUser(){
+        val email = binding.emailEditText.text.toString()
+        val password = binding.passwordEditText.text.toString()
+        val repeatPassword = binding.repeatPasswordEditText.text.toString()
+        val username = binding.userNameEditText.text.toString()
+        val isChecked = binding.checkboxAgreeTermsConditions.isChecked
 
+        fun checkData(): Boolean {
+            when {
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                    showToast(R.string.incorrect_email)
+                    return false
+                }
+
+                password.length < 6 || password.contains(" ") -> {
+                    showToast(R.string.password_length_require)
+                    return false
+                }
+
+                password != repeatPassword -> {
+                    showToast(R.string.password_mismatch)
+                    return false
+                }
+
+                username.length < 4 || username.contains(" ") -> {
+                    showToast(R.string.username_length_require)
+                    return false
+                }
+
+                !isChecked -> {
+                    showToast(R.string.privacy_agreement)
+                    return false
+                }
+
+                else -> return true
+            }
+        }
+        fun createUser() {
+
+        }
+
+        if (checkData()){
+            createUser()
+        }
     }
+
+
 }

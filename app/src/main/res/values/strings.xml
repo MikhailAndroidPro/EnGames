@@ -20,4 +20,9 @@
     <string name="no_account_title">Don`t have account?</string>
     <string name="yes_account_title">Have account?</string>
     <string name="auth_checkbox_text">Remember me</string>
+    <string name="incorrect_email">Некорректный email</string>
+    <string name="password_length_require">Пароль должен быть не меньше 6ти символов</string>
+    <string name="password_mismatch">Пароли не совпадают</string>
+    <string name="username_length_require">Имя пользователя должно быть не меньше 4х символов</string>
+    <string name="privacy_agreement">Согласитесь с условиями использования</string>
 </resources>
