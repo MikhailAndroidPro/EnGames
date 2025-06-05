@@ -33,7 +33,7 @@ abstract class BaseFragment<VB : ViewBinding>(
     }
 
     protected fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
