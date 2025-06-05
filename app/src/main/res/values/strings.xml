@@ -44,5 +44,6 @@
     <string name="rate_us">Rate us in RuStore</string>
     <string name="share_link">Share link with friends</string>
     <string name="delete_account">Delete Account</string>
+    <string name="log_out">Log Out</string>
 
 </resources>
