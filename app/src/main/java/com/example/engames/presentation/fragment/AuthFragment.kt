@@ -20,15 +20,14 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
     }
     override fun applyClick() {
         super.applyClick()
-        binding.eyeBtn.setOnClickListener{
-            if (isPasswordHidden) {
-                binding.eyeBtn.setImageDrawable(context().getDrawable(R.drawable.eye_open))
-                binding.passwordEditText.transformationMethod = null
-            } else {
-                binding.eyeBtn.setImageDrawable(context().getDrawable(R.drawable.eye_close))
-                binding.passwordEditText.transformationMethod = PasswordTransformationMethod()
-            }
+        binding.eyeBtn.setOnClickListener {
             isPasswordHidden = !isPasswordHidden
+            binding.eyeBtn.setImageResource(
+                if (isPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
+            )
+            binding.passwordEditText.transformationMethod =
+                if (isPasswordHidden) PasswordTransformationMethod.getInstance() else null
+            binding.passwordEditText.setSelection(binding.passwordEditText.text.length)
         }
         binding.signUpText.setOnClickListener{
             findNavController().navigate(R.id.action_authFragment_to_regFragment)
