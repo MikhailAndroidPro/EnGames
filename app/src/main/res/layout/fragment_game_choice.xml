@@ -45,6 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"/>
             <TextView
+                android:id="@+id/optionAText"
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -70,6 +71,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"/>
             <TextView
+                android:id="@+id/optionBText"
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -94,6 +96,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"/>
             <TextView
+                android:id="@+id/optionCText"
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -118,6 +121,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"/>
             <TextView
+                android:id="@+id/optionDText"
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
