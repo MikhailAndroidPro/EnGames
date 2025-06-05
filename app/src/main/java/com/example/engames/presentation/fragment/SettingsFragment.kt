@@ -54,6 +54,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
                 ThemeMode.DARK -> switchTheme.isOn = true
                 ThemeMode.LIGHT -> switchTheme.isOn = false
             }
+            when(App.settingsManager.getCurrentLanguage()){
+                "ru" -> languageSwitch.isOn = true
+                "en" -> languageSwitch.isOn = false
+            }
         }
     }
     private fun deleteAccount(){
@@ -61,10 +65,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     }
 
     private fun setRussian(){
-        activity().setLanguage(resources.getString(R.string.en))
+        activity().setLanguage(resources.getString(R.string.ru).lowercase())
     }
     private fun setEnglish() {
-        activity().setLanguage(resources.getString(R.string.en))
+        activity().setLanguage(resources.getString(R.string.en).lowercase())
     }
     private fun setDarkTheme() {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK

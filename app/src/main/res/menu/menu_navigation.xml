@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/gamesFragment" android:icon="@drawable/games" android:title="@string/games"/>
-    <item android:id="@+id/statisticFragment" android:icon="@drawable/statistic" android:title="@string/statistic"/>
-    <item android:id="@+id/aboutFragment" android:icon="@drawable/about" android:title="@string/about"/>
-    <item android:id="@+id/profileFragment" android:icon="@drawable/profile" android:title="@string/profile"/>
-    <item android:id="@+id/settingsFragment" android:icon="@drawable/settings" android:title="@string/settings"/>
+    <item android:id="@+id/gamesFragment" android:icon="@drawable/games" android:title="@string/games_title"/>
+    <item android:id="@+id/statisticFragment" android:icon="@drawable/statistic" android:title="@string/statistic_title"/>
+    <item android:id="@+id/aboutFragment" android:icon="@drawable/about" android:title="@string/about_title"/>
+    <item android:id="@+id/profileFragment" android:icon="@drawable/profile" android:title="@string/profile_title"/>
+    <item android:id="@+id/settingsFragment" android:icon="@drawable/settings" android:title="@string/settings_title"/>
 </menu>

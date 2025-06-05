@@ -1,5 +1,7 @@
 package com.example.engames.presentation.base.activity
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -25,6 +27,20 @@ abstract class BaseActivity : AppCompatActivity() {
         setSettings()
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        fun wrapContext(context: Context, language: String): Context {
+            val locale = Locale(language)
+            Locale.setDefault(locale)
+
+            val config = Configuration(context.resources.configuration)
+            config.setLocale(locale)
+
+            return context.createConfigurationContext(config)
+        }
+        val lang = App.settingsManager.getCurrentLanguage()
+        val context = wrapContext(newBase, lang)
+        super.attachBaseContext(context)
+    }
     private fun setSettings() {
         if (App.sharedManager.isThemeChanged()) {
             App.settingsManager.setCurrentTheme()
@@ -33,14 +49,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
     open fun setLanguage(languageCode: String, isLaunch: Boolean = false) {
         App.sharedManager.saveLanguagePreference(languageCode)
-        updateResources(languageCode, isLaunch)
-    }
-    private fun updateResources(languageCode: String, isLaunch: Boolean) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val config = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
         if (!isLaunch) this.recreate()
     }
     protected fun pinNavView(idHost: Int, idNavigation: Int, view: View){

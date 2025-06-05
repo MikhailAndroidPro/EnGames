@@ -34,8 +34,8 @@
     <string name="save_changes">Сохранить изменения</string>
     <string name="new_password">Новый пароль</string>
     <string name="theme">Тема</string>
-    <string name="dark">Тёмная</string>
-    <string name="light">Светлая</string>
+    <string name="dark">Тьма</string>
+    <string name="light">Свет</string>
     <string name="language">Язык</string>
     <string name="rate_us">Оцените нас в RuStore</string>
     <string name="share_link">Поделитесь ссылкой с друзьями</string>

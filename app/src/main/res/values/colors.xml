@@ -17,4 +17,5 @@
     <color name="alternativeSecond">#FF1F1F1F</color>
     <color name="alternativeHint">#B42C2C2C</color>
     <color name="alternativeBgShape">#FFFAFAFA</color>
+    <color name="switch_light">#FFDDDDDD</color>
 </resources>
