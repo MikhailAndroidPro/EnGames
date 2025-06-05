@@ -1,5 +1,6 @@
 package com.example.engames.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,10 +18,9 @@ class GamesViewModel : BaseViewModel() {
     fun loadGames() {
         viewModelScope.launch {
             try {
-//                val games = gamesRepository.getGames()
-//                _listGames.value = ArrayList(games)
-            } catch (e: Exception) {
 
+            } catch (e: Exception) {
+                Log.e("Supabase", "Error fetching table list", e)
             } finally {
                 isTaskReady.value = true
             }

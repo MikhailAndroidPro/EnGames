@@ -26,4 +26,8 @@
     <string name="username_length_require">Имя пользователя должно быть не меньше 4х символов</string>
     <string name="privacy_agreement">Согласитесь с условиями использования</string>
     <string name="games_title">Games</string>
+    <string name="profile_title">Profile</string>
+    <string name="about_title">About this app</string>
+    <string name="settings_title">Settings</string>
+    <string name="statistic_title">Statistic</string>
 </resources>

@@ -18,26 +18,27 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity().showNavigationView()
+        viewModel.loadGames()
         setRecyclerLayoutManager()
     }
 
     override fun setObservers() {
         super.setObservers()
         viewModel.isTaskReady.observe(viewLifecycleOwner) { isReady ->
-            binding.pbLoad.visibility = View.GONE
             if (isReady == true) {
-                viewModel.listGames.observe(viewLifecycleOwner) { games ->
-                    if (!games.isNullOrEmpty()) {
-                        setRecyclerViewAdapter()
-                    }
+                binding.pbLoad.visibility = View.GONE
+                if (viewModel.listGames.value?.isEmpty() == false) {
+                    setRecyclerViewAdapter()
                 }
                 viewModel.isTaskReady.value = false
             }
         }
     }
+
     override fun setRecyclerViewAdapter() {
         binding.rvGames.adapter = GamesAdapter(listOf())
     }
+
     override fun setRecyclerLayoutManager() {
         binding.rvGames.layoutManager = LinearLayoutManager(context())
     }

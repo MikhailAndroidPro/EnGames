@@ -27,8 +27,4 @@ class MainActivity : BaseActivity() {
         }
         pinNavView(binding.bottomNavigation)
     }
-    override fun navigate(action: Int) {
-        super.navigate(action)
-        binding.navMainFragment.findNavController().navigate(action)
-    }
 }

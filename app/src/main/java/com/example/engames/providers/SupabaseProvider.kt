@@ -12,7 +12,7 @@ import io.ktor.client.plugins.logging.Logging
 
 object SupabaseProvider {
     private const val URL = "URL"
-    private const val KEY = "TOKEN"
+    private const val KEY = "KEY"
 
     @OptIn(SupabaseInternal::class)
     val client: SupabaseClient by lazy {

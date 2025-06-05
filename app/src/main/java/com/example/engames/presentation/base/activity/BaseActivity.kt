@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.domain.utils.ActionHolder.ActionHolder.getActionId
-import com.example.domain.utils.ActionHolder.ActionHolder.setActionId
 import com.example.engames.app.App
 import java.util.Locale
 
@@ -26,19 +24,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
     fun hideNavigationView(){
         navView.visibility = View.GONE
-    }
-    open fun navigate(action: Int) {}
-    override fun onBackPressed() {
-        val actionId = getActionId()
-        if (actionId != -1) {
-            setActionId(-1)
-            try {
-                navigate(actionId)
-            }
-            catch (e: Exception){
-                super.onBackPressed()
-            }
-        } else super.onBackPressed()
     }
 
     private fun setSettings() {

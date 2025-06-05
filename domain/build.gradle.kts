@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     kotlin("plugin.serialization") version "2.0.21"
+    id("kotlin-parcelize")
 
 }
 
@@ -45,4 +46,5 @@ dependencies {
 
     implementation(libs.gson)
     implementation(libs.kotlin.stdlib.common)
+    implementation(libs.kotlinx.serialization.json)
 }
