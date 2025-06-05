@@ -1,4 +1,10 @@
 package com.example.engames.presentation.viewmodel
 
-class RegViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.engames.presentation.base.BaseViewModel
+
+class RegViewModel : BaseViewModel() {
+    override fun resumeState() {
+
+    }
 }

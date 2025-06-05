@@ -1,4 +1,10 @@
 package com.example.engames.presentation.viewmodel
 
-class ProfileViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.engames.presentation.base.BaseViewModel
+
+class ProfileViewModel : BaseViewModel(){
+    override fun resumeState() {
+
+    }
 }

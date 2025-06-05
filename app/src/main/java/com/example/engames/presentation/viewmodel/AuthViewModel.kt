@@ -1,4 +1,10 @@
 package com.example.engames.presentation.viewmodel
 
-class AuthViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.engames.presentation.base.BaseViewModel
+
+class AuthViewModel : BaseViewModel() {
+    override fun resumeState() {
+
+    }
 }
