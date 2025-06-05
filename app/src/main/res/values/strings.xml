@@ -44,4 +44,11 @@
     <string name="en">EN</string>
     <string name="ru_ru">ru-RU</string>
     <string name="en_en">en-EN</string>
+    <string name="Camera">📷 Камера</string>
+    <string name="gallery">🖼️ Галерея</string>
+    <string name="pick_image_resource">Выберите источник изображения</string>
+    <string name="camera_permission">Camera permission</string>
+    <string name="access_camera">We need access to your camera to take photos.</string>
+    <string name="allow">Allow</string>
+    <string name="cancel">Cancel</string>
 </resources>
