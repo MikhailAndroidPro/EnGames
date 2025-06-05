@@ -18,30 +18,31 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
 
     override fun applyClick() {
         super.applyClick()
-        binding.signInText.setOnClickListener{
-            findNavController().popBackStack()
-        }
-        binding.signUpButton.setOnClickListener{
-            registerUser()
-        }
-        binding.eyeBtnPassword.setOnClickListener {
-            isPasswordHidden = !isPasswordHidden
-            binding.eyeBtnPassword.setImageResource(
-                if (isPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
-            )
-            binding.passwordEditText.transformationMethod =
-                if (isPasswordHidden) PasswordTransformationMethod.getInstance() else null
-            binding.passwordEditText.setSelection(binding.passwordEditText.text.length)
-        }
-
-        binding.eyeBtnRepeatPassword.setOnClickListener {
-            isRepeatPasswordHidden = !isRepeatPasswordHidden
-            binding.eyeBtnRepeatPassword.setImageResource(
-                if (isRepeatPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
-            )
-            binding.repeatPasswordEditText.transformationMethod =
-                if (isRepeatPasswordHidden) PasswordTransformationMethod.getInstance() else null
-            binding.repeatPasswordEditText.setSelection(binding.repeatPasswordEditText.text.length)
+        with(binding) {
+            signInText.setOnClickListener{
+                findNavController().popBackStack()
+            }
+            signUpButton.setOnClickListener{
+                registerUser()
+            }
+            eyeBtnPassword.setOnClickListener {
+                isPasswordHidden = !isPasswordHidden
+                eyeBtnPassword.setImageResource(
+                    if (isPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
+                )
+                passwordEditText.transformationMethod =
+                    if (isPasswordHidden) PasswordTransformationMethod.getInstance() else null
+                passwordEditText.setSelection(passwordEditText.text.length)
+            }
+            eyeBtnRepeatPassword.setOnClickListener {
+                isRepeatPasswordHidden = !isRepeatPasswordHidden
+                eyeBtnRepeatPassword.setImageResource(
+                    if (isRepeatPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
+                )
+                repeatPasswordEditText.transformationMethod =
+                    if (isRepeatPasswordHidden) PasswordTransformationMethod.getInstance() else null
+                repeatPasswordEditText.setSelection(repeatPasswordEditText.text.length)
+            }
         }
     }
 

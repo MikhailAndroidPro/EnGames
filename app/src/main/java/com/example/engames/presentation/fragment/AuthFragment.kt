@@ -20,20 +20,26 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
     }
     override fun applyClick() {
         super.applyClick()
-        binding.eyeBtn.setOnClickListener {
-            isPasswordHidden = !isPasswordHidden
-            binding.eyeBtn.setImageResource(
-                if (isPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
-            )
-            binding.passwordEditText.transformationMethod =
-                if (isPasswordHidden) PasswordTransformationMethod.getInstance() else null
-            binding.passwordEditText.setSelection(binding.passwordEditText.text.length)
-        }
-        binding.signUpText.setOnClickListener{
-            findNavController().navigate(R.id.action_authFragment_to_regFragment)
+        with(binding) {
+            eyeBtn.setOnClickListener {
+                isPasswordHidden = !isPasswordHidden
+                eyeBtn.setImageResource(
+                    if (isPasswordHidden) R.drawable.eye_close else R.drawable.eye_open
+                )
+                passwordEditText.transformationMethod =
+                    if (isPasswordHidden) PasswordTransformationMethod.getInstance() else null
+                passwordEditText.setSelection(passwordEditText.text.length)
+            }
+            signUpText.setOnClickListener{
+                findNavController().navigate(R.id.action_authFragment_to_regFragment)
+            }
+            signInButton.setOnClickListener {
+                authUser()
+            }
         }
     }
     private fun authUser(){
-        App.sharedManager.logIn()
+        if (binding.checkboxRememberMe.isChecked) App.sharedManager.logIn()
+        findNavController().navigate(R.id.action_authFragment_to_gamesFragment)
     }
 }
