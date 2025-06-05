@@ -8,10 +8,27 @@
 
     <style name="EditTextStyle" parent="Theme.EnGames">
         <item name="android:background">@drawable/edit_text_background_dark</item>
-        <item name="android:paddingHorizontal">12dp</item>
-        <item name="android:paddingVertical">10dp</item>
         <item name="android:textColorHint">@color/hintColor</item>
+        <item name="android:paddingHorizontal">24dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:maxLength">24</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="MainButton" parent="Theme.EnGames">
+        <item name="android:background">@drawable/button_gradient</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/mainColor</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:paddingHorizontal">24dp</item>
+        <item name="android:paddingVertical">16dp</item>
+    </style>
+
+    <style name="IconsStyle" parent="Theme.EnGames">
+        <item name="tint">@color/alternativeMain</item>
     </style>
 </resources>

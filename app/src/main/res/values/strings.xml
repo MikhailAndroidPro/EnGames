@@ -5,9 +5,16 @@
     <string name="about">About</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="auth_title">Log In</string>
-    <string name="auth_subtitle">klsjkjvkljfdnvkjdfnvkjdfnvkjdfnv.kjn.k d jdkjn jdn jdn kjdnbfk</string>
+    <string name="auth_title">Sign In</string>
+    <string name="auth_subtitle">Welcome to the best English learning app in whole world!</string>
     <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="auth_butt_text">Sign In</string>
+    <string name="register_butt_text">Sign Up</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="no_account_title">Don`t have account?</string>
+    <string name="yes_account_title">Have account?</string>
+    <string name="auth_checkbox_text">Remember me</string>
 </resources>
