@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 
 const val APP_NAME = "EnGames"
+const val APP_LANGUAGE = "AppLanguage"
 const val LOGIN_CHECK = "isAuthorized"
+const val SAVED_UUID = "uuid"
 class SharedPreferencesManager(baseContext: Context) {
     private val preferences: SharedPreferences = baseContext.getSharedPreferences(APP_NAME, Context.MODE_PRIVATE)
 
@@ -18,6 +20,14 @@ class SharedPreferencesManager(baseContext: Context) {
         preferences.edit { putBoolean(LOGIN_CHECK, false) }
     }
 
+    fun saveUid(uuid: String) {
+        preferences.edit { putString(SAVED_UUID, uuid) }
+    }
+
+    fun getUid() : String? {
+        return preferences.getString(SAVED_UUID, "")
+    }
+
     fun checkLogIn(): Boolean {
         return preferences.getBoolean(LOGIN_CHECK, false)
     }
@@ -27,11 +37,11 @@ class SharedPreferencesManager(baseContext: Context) {
     }
 
     fun saveLanguagePreference(languageCode: String) {
-        preferences.edit { putString("AppLanguage", languageCode) }
+        preferences.edit { putString(APP_LANGUAGE, languageCode) }
     }
 
     fun loadLanguagePreference(): String? {
-        return preferences.getString("AppLanguage", "ru")
+        return preferences.getString(APP_LANGUAGE, "ru")
     }
 
     fun isThemeChanged(): Boolean {

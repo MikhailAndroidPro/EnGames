@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.domain.models.enums.ThemeMode
 import com.example.engames.R
@@ -46,7 +47,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     }
     private fun logout(){
         App.sharedManager.logOut()
-        findNavController().popBackStack(R.id.authFragment, true)
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.nav_graph, inclusive = true)
+            .build()
+
+        findNavController().navigate(R.id.authFragment, null, navOptions)
     }
     private fun setupView(){
         with(binding) {

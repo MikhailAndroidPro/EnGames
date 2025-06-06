@@ -53,8 +53,16 @@
     <string name="cancel">Cancel</string>
     <string name="make_answer">Make answer</string>
     <string name="game_enter_title">Translate this word</string>
+    <string name="timeout_exception">Timeout exception</string>
+    <string name="internet_excepteion">Internet exception</string>
+    <string name="user_not_found">Failed to find user</string>
+    <string name="exception">Unknown exception</string>
     <string name="the_word_is">The word is:</string>
     <string name="write_translation_here">write translation here</string>
     <string name="en_digits">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="game_connect_title">Drag words to translation</string>
+    <string name="successfully_authorized">Successfully authorized</string>
+    <string name="successfully_registered">Successfully registered</string>
+    <string name="successfully_logout">Successfully logout</string>
+    <string name="failed_to_get_user">Failed to get user</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.example.engames.presentation.base.BaseViewModel
 import com.example.engames.presentation.base.activity.BaseActivity
+import com.example.engames.presentation.viewmodel.RegViewModel
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB

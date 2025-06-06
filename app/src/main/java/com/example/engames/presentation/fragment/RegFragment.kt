@@ -2,12 +2,14 @@ package com.example.engames.presentation.fragment
 
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
-import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.engames.R
 import com.example.engames.databinding.FragmentRegBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
-import kotlin.compareTo
+import com.example.engames.presentation.viewmodel.RegViewModel
+import kotlinx.coroutines.launch
 
 
 class RegFragment : BaseFragment<FragmentRegBinding>(
@@ -15,14 +17,15 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
 ) {
     private var isPasswordHidden = true
     private var isRepeatPasswordHidden = true
+    override val viewModel: RegViewModel by viewModels()
 
     override fun applyClick() {
         super.applyClick()
         with(binding) {
-            signInText.setOnClickListener{
+            signInText.setOnClickListener {
                 findNavController().popBackStack()
             }
-            signUpButton.setOnClickListener{
+            signUpButton.setOnClickListener {
                 registerUser()
             }
             eyeBtnPassword.setOnClickListener {
@@ -46,7 +49,7 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
         }
     }
 
-    private fun registerUser(){
+    private fun registerUser() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
         val repeatPassword = binding.repeatPasswordEditText.text.toString()
@@ -83,11 +86,17 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
                 else -> return true
             }
         }
-        fun createUser() {
 
+        fun createUser() {
+            lifecycleScope.launch {
+                val email = binding.emailEditText.text.toString()
+                val password = binding.passwordEditText.text.toString()
+                val name = binding.userNameEditText.text.toString()
+                viewModel.registerUser(context(), email, password, name)
+            }
         }
 
-        if (checkData()){
+        if (checkData()) {
             createUser()
             findNavController().popBackStack()
         }
