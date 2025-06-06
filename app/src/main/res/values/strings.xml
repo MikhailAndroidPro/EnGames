@@ -59,7 +59,7 @@
     <string name="exception">Unknown exception</string>
     <string name="the_word_is">The word is:</string>
     <string name="write_translation_here">write translation here</string>
-    <string name="en_digits">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="en_digits">qwertyuiopasdfghjklzxcvbnm QWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="game_connect_title">Drag words to translation</string>
     <string name="successfully_authorized">Successfully authorized</string>
     <string name="successfully_registered">Successfully registered</string>
@@ -73,4 +73,6 @@
     <string name="you_lose">You Lose(</string>
     <string name="select_translation">"Choose translation of word:\n"</string>
     <string name="select_wrong">"Choose a word that is not on topic:\n"</string>
+    <string name="you_wrong">You take mistake\n</string>
+    <string name="correct_word_is">"The correct word is: "</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.engames.data.repository
 import android.content.Context
 import com.example.domain.models.GameChoiceTask
 import com.example.domain.models.GameConnectModel
+import com.example.domain.models.GameEnterTask
 import com.example.domain.models.GameModel
 import com.example.domain.models.enums.Difficulty
 import io.github.jan.supabase.SupabaseClient
@@ -60,8 +61,24 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getGame3(diff: Difficulty) {
+    suspend fun getGame3(diff: Difficulty) : GameEnterTask {
+        return try {
+            val randomId = when(diff) {
+                Difficulty.Easy -> Random.nextInt(1, 16)
+                Difficulty.Medium -> Random.nextInt(16, 31)
+                Difficulty.Hard -> Random.nextInt(31, 46)
+            }
 
+            val data = supabase.from("Game3")
+                .select {
+                    filter {
+                        eq("id", randomId)
+                    }
+                }.decodeSingle<GameEnterTask>()
+            data
+        } catch (e: Exception) {
+            return GameEnterTask()
+        }
     }
 
     suspend fun getGame4(diff: Difficulty) : GameChoiceTask {

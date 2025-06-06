@@ -54,7 +54,7 @@
     <string name="make_answer">Дать ответ</string>
     <string name="the_word_is">Переведи слово:</string>
     <string name="write_translation_here">впиши перевод сюда</string>
-    <string name="en_digits">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="en_digits">qwertyuiopasdfghjklzxcvbnm QWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="successfully_authorized">Авторизация успешна</string>
     <string name="timeout_exception">Превышено время ожидания серверва</string>
     <string name="internet_excepteion">Не работает интернет</string>
@@ -74,4 +74,6 @@
     <string name="you_lose">Вы проиграли(</string>
     <string name="select_translation">"Выбери перевод слова:\n"</string>
     <string name="select_wrong">"Выбери слово не по теме:\n"</string>
+    <string name="you_wrong">Вы не угадали\n</string>
+    <string name="correct_word_is">"Правильное слово: "</string>
 </resources>
