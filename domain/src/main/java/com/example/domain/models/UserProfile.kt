@@ -7,5 +7,6 @@ data class UserProfile(
     var email: String? = null,
     var newPassword: String = "",
     var gender: Int = Gender.Male.ordinal,
-    var image: String? = null
+    var image: String? = null,
+    var oldHash: Int?=null
 )

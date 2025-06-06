@@ -7,10 +7,12 @@ import com.example.domain.models.FullUser
 import com.example.domain.models.UserProfile
 import com.example.domain.models.UserStatistic
 import com.example.engames.R
+import com.example.engames.app.App
 import com.example.engames.data.ResponseState
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.exceptions.HttpRequestException
 import io.github.jan.supabase.exceptions.RestException
+import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.from
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.serialization.json.buildJsonObject
@@ -23,11 +25,18 @@ class UserRepository(private val supabase: SupabaseClient) {
             val data = supabase.from("User")
                 .select {
                     filter {
-                        eq("user_id", uuid)
+                        eq("uuid", uuid)
                     }
                 }
                 .decodeSingle<FullUser>()
-            UserProfile(data.username, data.email, "", data.gender_id, data.photo_link)
+            UserProfile(
+                data.username,
+                data.email,
+                "",
+                data.gender_id,
+                data.photo_link,
+                data.password_hash
+            )
         } catch (e: Exception) {
             Log.e("User repository", "Failed: ${e.message}")
             return UserProfile()
@@ -74,8 +83,47 @@ class UserRepository(private val supabase: SupabaseClient) {
 
     }
 
-    suspend fun updateUser(user: UserProfile) {
-
+    suspend fun updateUser(context: Context, user: UserProfile): ResponseState<Unit> {
+        try {
+            val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
+            if (user.newPassword.isNotEmpty()) {
+                supabase.from("User")
+                    .update({
+                        set("password_hash", user.newPassword.hashCode())
+                    }) {
+                        select()
+                        filter {
+                            eq("uuid", uid)
+                        }
+                    }
+            }
+            App.authRepository.updateAuthUser(
+                context,
+                user.newPassword,
+                user.email
+                    ?: return ResponseState.Error(context.resources.getResourceName(R.string.exception))
+            )
+            supabase.from("User")
+                .update({
+                    set("email", user.email)
+                    set("username", user.username)
+                    set("gender_id", user.gender)
+                }) {
+                    select()
+                    filter {
+                        eq("uuid", uid)
+                    }
+                }
+            return ResponseState.Success(Unit)
+        } catch (e: RestException) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.internet_excepteion))
+        } catch (e: HttpRequestException) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.user_not_found))
+        } catch (e: HttpRequestTimeoutException) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.timeout_exception))
+        } catch (e: Exception) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.exception))
+        }
     }
 
     suspend fun getUserStatistic(uuid: String) {
