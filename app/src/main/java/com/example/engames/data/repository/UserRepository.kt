@@ -20,14 +20,14 @@ import java.time.format.DateTimeFormatter
 class UserRepository(private val supabase: SupabaseClient) {
     suspend fun getUserInfo(uuid: String): UserProfile {
         return try {
-            val data = supabase.from("Users")
+            val data = supabase.from("User")
                 .select {
                     filter {
                         eq("user_id", uuid)
                     }
                 }
-                .decodeSingle<UserProfile>()
-            data
+                .decodeSingle<FullUser>()
+            UserProfile(data.username, data.email, "", data.gender_id, data.photo_link)
         } catch (e: Exception) {
             Log.e("User repository", "Failed: ${e.message}")
             return UserProfile()

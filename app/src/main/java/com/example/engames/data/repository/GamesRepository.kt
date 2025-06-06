@@ -21,9 +21,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getGame1(diff: Difficulty) : GameChoiceTask {
+    suspend fun getGame1(diff: Difficulty): GameChoiceTask {
         return try {
-            val randomId = when(diff) {
+            val randomId = when (diff) {
                 Difficulty.Easy -> Random.nextInt(1, 11)
                 Difficulty.Medium -> Random.nextInt(11, 21)
                 Difficulty.Hard -> Random.nextInt(21, 31)
@@ -41,9 +41,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getGame2(diff: Difficulty) : GameConnectModel {
+    suspend fun getGame2(diff: Difficulty): GameConnectModel {
         return try {
-            val randomId = when(diff) {
+            val randomId = when (diff) {
                 Difficulty.Easy -> Random.nextInt(1, 11)
                 Difficulty.Medium -> Random.nextInt(11, 21)
                 Difficulty.Hard -> Random.nextInt(21, 31)
@@ -61,9 +61,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getGame3(diff: Difficulty) : GameEnterTask {
+    suspend fun getGame3(diff: Difficulty): GameEnterTask {
         return try {
-            val randomId = when(diff) {
+            val randomId = when (diff) {
                 Difficulty.Easy -> Random.nextInt(1, 16)
                 Difficulty.Medium -> Random.nextInt(16, 31)
                 Difficulty.Hard -> Random.nextInt(31, 46)
@@ -81,9 +81,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getGame4(diff: Difficulty) : GameChoiceTask {
+    suspend fun getGame4(diff: Difficulty): GameChoiceTask {
         return try {
-            val randomId = when(diff) {
+            val randomId = when (diff) {
                 Difficulty.Easy -> Random.nextInt(1, 16)
                 Difficulty.Medium -> Random.nextInt(16, 31)
                 Difficulty.Hard -> Random.nextInt(31, 46)
@@ -101,7 +101,13 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getGame5(diff: Difficulty) {
-
+    suspend fun getGame5(): List<GameChoiceTask> {
+        return try {
+            val data = supabase.from("Game5")
+                .select().decodeList<GameChoiceTask>()
+            data
+        } catch (e: Exception) {
+            return emptyList()
+        }
     }
 }

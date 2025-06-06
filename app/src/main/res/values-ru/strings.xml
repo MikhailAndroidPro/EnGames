@@ -76,4 +76,6 @@
     <string name="select_wrong">"Выбери слово не по теме:\n"</string>
     <string name="you_wrong">Вы не угадали\n</string>
     <string name="correct_word_is">"Правильное слово: "</string>
+    <string name="you_get">"Вы набрали "</string>
+    <string name="points">" баллов!"</string>
 </resources>

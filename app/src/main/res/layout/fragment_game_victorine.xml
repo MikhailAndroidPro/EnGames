@@ -12,7 +12,6 @@
         style="@style/SubTitleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Test question"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +22,6 @@
         style="@style/SubTitleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="0/24"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
@@ -60,8 +58,7 @@
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="7.5"
-                android:text="Test" />
+                android:layout_weight="7.5" />
         </LinearLayout>
 
 
@@ -87,8 +84,7 @@
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="7.5"
-                android:text="Test" />
+                android:layout_weight="7.5" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,8 +109,7 @@
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="7.5"
-                android:text="Test" />
+                android:layout_weight="7.5" />
         </LinearLayout>
 
         <LinearLayout
@@ -139,8 +134,7 @@
                 style="@style/ToggleCard.Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="7.5"
-                android:text="Test" />
+                android:layout_weight="7.5" />
         </LinearLayout>
     </LinearLayout>
 
@@ -149,7 +143,7 @@
         style="@style/MainButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="48dp"
         android:text="@string/make_answer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

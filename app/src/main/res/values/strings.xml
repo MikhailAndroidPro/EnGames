@@ -75,4 +75,6 @@
     <string name="select_wrong">"Choose a word that is not on topic:\n"</string>
     <string name="you_wrong">You take mistake\n</string>
     <string name="correct_word_is">"The correct word is: "</string>
+    <string name="you_get">"You get "</string>
+    <string name="points">" points!"</string>
 </resources>

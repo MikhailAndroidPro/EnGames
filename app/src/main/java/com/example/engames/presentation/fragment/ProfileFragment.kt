@@ -15,8 +15,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.example.domain.models.UserProfile
 import com.example.domain.models.enums.Gender
 import com.example.engames.R
+import com.example.engames.data.ResponseState
 import com.example.engames.databinding.FragmentProfileBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.ProfileViewModel
@@ -27,6 +29,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override val viewModel: ProfileViewModel by viewModels()
     private var isPasswordHidden = true
     private var imageChanged = false
+    private lateinit var currentUserProfile: UserProfile
 
     private val cameraPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -53,52 +56,35 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchUserProfile()
-        setupView()
+        binding.userNameEditText.addTextChangedListener(this@ProfileFragment)
+        binding.emailEditText.addTextChangedListener(this@ProfileFragment)
+        binding.newPasswordEditText.addTextChangedListener(this@ProfileFragment)
     }
 
     private fun setupView() = with(binding) {
         Glide.with(userImg)
-            .load(R.drawable.user_image_placeholder)
+            .load(currentUserProfile.image)
+            .error(R.drawable.user_image_placeholder)
             .into(userImg)
-
-        userNameEditText.addTextChangedListener(this@ProfileFragment)
-        emailEditText.addTextChangedListener(this@ProfileFragment)
-        newPasswordEditText.addTextChangedListener(this@ProfileFragment)
-
-        genderBtn.setOnClickListener {
-            toggleGender()
-            checkUserChanges()
-        }
-
-        eyeBtn.setOnClickListener {
-            togglePasswordVisibility()
-        }
-
-        saveChangesButton.setOnClickListener {
-            //
-        }
-
-        userImg.setOnClickListener { imagePicker() }
     }
 
     override fun setObservers() {
         super.setObservers()
-        viewModel.user.observe(viewLifecycleOwner) { user ->
-            binding.apply {
-                userNameEditText.setText(user.username)
-                emailEditText.setText(user.email)
-                newPasswordEditText.setText("")
-                genderBtn.text = user.gender.name
-                genderBtn.setBackgroundResource(
-                    if (user.gender == Gender.Male) R.drawable.male_background
-                    else R.drawable.female_background
-                )
+        viewModel.user.observe(viewLifecycleOwner) { task ->
+            when(task) {
+                is ResponseState.Success -> {
+                    currentUserProfile = task.data
+                    setupView()
+                }
+                is ResponseState.Error -> {
+                    showToast(task.message)
+                }
             }
         }
     }
 
     private fun checkUserChanges() {
-        val initial = viewModel.user.value ?: return
+        val initial = currentUserProfile
         val currentUsername = binding.userNameEditText.text.toString()
         val currentEmail = binding.emailEditText.text.toString()
         val currentGender = binding.genderBtn.text.toString()
@@ -106,7 +92,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
         val hasChanged = currentUsername != initial.username ||
                 currentEmail != initial.email ||
-                currentGender != initial.gender.name ||
+                currentGender != Gender.entries.firstOrNull { it.value == initial.gender }?.name  ||
                 imageChanged ||
                 newPassword.length >= 6
 
@@ -176,6 +162,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             .show()
     }
 
+    override fun applyClick() = with(binding) {
+        super.applyClick()
+        genderBtn.setOnClickListener {
+            toggleGender()
+            checkUserChanges()
+        }
+
+        eyeBtn.setOnClickListener {
+            togglePasswordVisibility()
+        }
+
+        saveChangesButton.setOnClickListener {
+            viewModel.saveUser(UserProfile())
+        }
+
+        userImg.setOnClickListener { imagePicker() }
+    }
     override fun afterTextChanged(s: Editable?) = checkUserChanges()
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}

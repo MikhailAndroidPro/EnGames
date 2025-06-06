@@ -3,6 +3,10 @@ package com.example.engames.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.domain.models.GameChoiceTask
+import com.example.engames.R
+import com.example.engames.data.ResponseState
 import com.example.engames.databinding.FragmentGameVictorineBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.GameVictorineViewModel
@@ -12,10 +16,12 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
 ) {
     override val viewModel: GameVictorineViewModel by viewModels()
     private var correctAnswers = 0
+    private var listQuestions: List<GameChoiceTask> = listOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTextViewToggleGroup()
+        viewModel.getGame5()
     }
 
     private fun setupTextViewToggleGroup() {
@@ -48,22 +54,35 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
     override fun setObservers() {
         super.setObservers()
 
-        viewModel.isTaskReady.observe(viewLifecycleOwner) {
-            if (it) {
-                finish()
+        viewModel.listTask.observe(viewLifecycleOwner) { task ->
+            when (task) {
+                is ResponseState.Success -> {
+                    if (task.data.isEmpty() == false) {
+                        listQuestions = task.data
+                        setupView(0)
+                        viewModel.currentQuestionId.observe(viewLifecycleOwner) {
+                            setupView(it)
+                        }
+                    } else {
+                        emptyListError()
+                    }
+                }
+
+                is ResponseState.Error -> {
+                    showToast(task.message)
+                }
             }
+
         }
-        viewModel.currentQuestionId.observe(viewLifecycleOwner) {
-            setupView(it)
-        }
-        viewModel.listTask.observe(viewLifecycleOwner) {
-            setupView(0)
-        }
+    }
+
+    private fun emptyListError() {
+
     }
 
     private fun setupView(id: Int) {
         with(binding) {
-            viewModel.listTask.value?.let {
+            listQuestions.let {
                 val task = it[id]
                 questionTxt.text = task.task
                 optionAText.text = task.answer0
@@ -85,15 +104,21 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         super.applyClick()
         with(binding) {
             answerButton.setOnClickListener {
-                if (viewModel.listTask.value?.get(viewModel.currentQuestionId.value)?.correct_answer_id == getSelectedOption()) {
+                if (listQuestions[viewModel.currentQuestionId.value ?: 0].correct_answer_id == getSelectedOption()) {
                     correctAnswers++
                 }
-                viewModel.nextQuestion()
+                if (viewModel.nextQuestion(listQuestions.size)) finish()
             }
         }
     }
 
     private fun finish() {
-
+        viewModel.finish()
+        showToast(buildString {
+            append(resources.getString(R.string.you_get))
+            append(correctAnswers)
+            append(resources.getString(R.string.points))
+        })
+        findNavController().popBackStack()
     }
 }
