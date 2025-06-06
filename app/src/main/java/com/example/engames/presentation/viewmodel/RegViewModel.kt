@@ -14,8 +14,6 @@ import kotlinx.coroutines.launch
 import kotlin.toString
 
 class RegViewModel : BaseViewModel() {
-    private val _state = MutableLiveData<ResponseState<Unit>>()
-    val state: LiveData<ResponseState<Unit>> = _state
     private val _stateCreation = MutableLiveData<ResponseState<Unit>>()
     val stateCreation: LiveData<ResponseState<Unit>> = _stateCreation
 

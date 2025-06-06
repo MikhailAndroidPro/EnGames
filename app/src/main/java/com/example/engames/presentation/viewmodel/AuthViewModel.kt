@@ -12,9 +12,6 @@ import com.example.engames.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class AuthViewModel : BaseViewModel() {
-    private val _state = MutableLiveData<ResponseState<Unit>>()
-    val state: LiveData<ResponseState<Unit>> = _state
-
     fun loginUser(context: Context, email: String, password: String) {
         viewModelScope.launch {
             try {

@@ -47,7 +47,8 @@ class UserRepository(private val supabase: SupabaseClient) {
                 email = email,
                 username = username,
                 password_hash = passwordHash,
-                theme_id = 2
+                theme_id = 2,
+                is_deleted = false
             )
             val lastEntrance = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             supabase.from("User").insert(userData)

@@ -67,4 +67,6 @@
     <string name="failed_to_get_user">Failed to get user</string>
     <string name="of_register"> of register</string>
     <string name="of_creation">" of creation"</string>
+    <string name="cant_delete_account">Не удалось удалить аккаунт</string>
+    <string name="cant_logout">Не удалось выйти из аккаунта</string>
 </resources>

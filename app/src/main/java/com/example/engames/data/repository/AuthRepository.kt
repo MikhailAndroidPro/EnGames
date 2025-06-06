@@ -9,6 +9,7 @@ import io.github.jan.supabase.exceptions.HttpRequestException
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
+import io.github.jan.supabase.postgrest.from
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -24,7 +25,7 @@ class AuthRepository(private val supabase: SupabaseClient) {
                 this.email = email
                 this.password = password
             }
-            val id = supabase.auth.currentUserOrNull() ?: "Failed to get user"
+            val id = supabase.auth.currentUserOrNull()?.id ?: "Failed to get user"
             App.sharedManager.saveUid(id.toString())
             return ResponseState.Success(Unit)
         } catch (e: RestException) {
@@ -48,7 +49,8 @@ class AuthRepository(private val supabase: SupabaseClient) {
                 this.email = email
                 this.password = password
             }
-            val id = supabase.auth.currentUserOrNull()?.id ?: context.resources.getString(R.string.failed_to_get_user)
+            val id = supabase.auth.currentUserOrNull()?.id
+                ?: context.resources.getString(R.string.failed_to_get_user)
             App.sharedManager.saveUid(id.toString())
 
             return ResponseState.Success(Unit)
@@ -62,6 +64,7 @@ class AuthRepository(private val supabase: SupabaseClient) {
             return ResponseState.Error(context.resources.getResourceName(R.string.exception))
         }
     }
+
     suspend fun logout(
         context: Context,
     ): ResponseState<Unit> {
@@ -79,12 +82,21 @@ class AuthRepository(private val supabase: SupabaseClient) {
             return ResponseState.Error(context.resources.getResourceName(R.string.exception))
         }
     }
+
     suspend fun deleteAccount(
         context: Context,
     ): ResponseState<Unit> {
         try {
-            supabase.auth.admin.deleteUser(App.sharedManager.getUid() ?: "")
-            App.sharedManager.saveUid("")
+            val uid = App.sharedManager.getUid() ?: ""
+            supabase.from("User")
+                .update(mapOf("is_deleted" to true)) {
+                    println("ABOBA" + uid)
+                    select()
+                    filter {
+                        eq("uuid", uid)
+                    }
+                }
+            supabase.auth.signOut()
             return ResponseState.Success(Unit)
         } catch (e: RestException) {
             return ResponseState.Error(context.resources.getResourceName(R.string.internet_excepteion))

@@ -14,5 +14,6 @@ data class FullUser(
     val password_hash: Int,
     val gender_id: Int = 1,
     val current_language: Int = 1,
-    val theme_id: Int = 1
+    val theme_id: Int = 1,
+    val is_deleted: Boolean = false
 ) : Parcelable

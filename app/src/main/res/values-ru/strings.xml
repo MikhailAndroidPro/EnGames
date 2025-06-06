@@ -68,4 +68,6 @@
     <string name="successfully_logout">Выход из аккаунта</string>
     <string name="of_register"> регистрации</string>
     <string name="of_creation">" создания"</string>
+    <string name="cant_delete_account">Не удалось удалить аккаунт</string>
+    <string name="cant_logout">Не удалось выйти из аккаунта</string>
 </resources>
