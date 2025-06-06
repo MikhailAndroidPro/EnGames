@@ -21,7 +21,7 @@ class GameVictorineViewModel : BaseViewModel() {
     }
 
     fun nextQuestion() {
-        if (_currentQuestionId.value?.plus(1)) {
+        if (_currentQuestionId.value?.plus(1) == 20) {
             finish()
         }
         else _currentQuestionId.value = _currentQuestionId.value!!+1
