@@ -90,7 +90,6 @@ class AuthRepository(private val supabase: SupabaseClient) {
             val uid = App.sharedManager.getUid() ?: ""
             supabase.from("User")
                 .update(mapOf("is_deleted" to true)) {
-                    println("ABOBA" + uid)
                     select()
                     filter {
                         eq("uuid", uid)

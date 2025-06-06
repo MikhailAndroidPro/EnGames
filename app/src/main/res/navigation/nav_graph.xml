@@ -201,7 +201,11 @@
             app:destination="@id/gameVictorineFragment" />
         <action
             android:id="@+id/action_gamesFragment_to_gameChoiceFragment"
-            app:destination="@id/gameChoiceFragment" />
+            app:destination="@id/gameChoiceFragment">
+            <argument
+                android:name="gamePosition"
+                app:argType="integer" />
+        </action>
         <action
             android:id="@+id/action_gamesFragment_to_gameConnectFragment"
             app:destination="@id/gameConnectFragment" />

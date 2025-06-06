@@ -9,5 +9,7 @@ import kotlinx.serialization.Serializable
 data class GameModel(
     var name: String,
     var description: String,
+    var name_ru: String,
+    var description_ru: String,
     var id: Int
 ) : Parcelable

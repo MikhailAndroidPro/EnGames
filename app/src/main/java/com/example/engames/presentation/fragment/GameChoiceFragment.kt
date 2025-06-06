@@ -13,10 +13,12 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
     FragmentGameChoiceBinding::inflate
 ) {
     override val viewModel: GameChoiceViewModel by viewModels()
+    private var position: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTextViewToggleGroup()
+        position = arguments?.getInt("gamePosition")!!
     }
     private fun setupTextViewToggleGroup() {
         val buttons = listOf(

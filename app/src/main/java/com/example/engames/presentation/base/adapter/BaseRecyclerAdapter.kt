@@ -17,10 +17,10 @@ abstract class BaseRecyclerAdapter<T, VB : ViewBinding>(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<VB>, position: Int) {
-        onBind(holder.binding, list[position])
+        onBind(holder.binding, list[position], position)
     }
 
     override fun getItemCount(): Int = list.size
 
-    protected abstract fun onBind(binding: VB, item: T)
+    protected abstract fun onBind(binding: VB, item: T, position: Int)
 }

@@ -8,11 +8,20 @@ import com.example.engames.databinding.GameViewBinding
 import com.example.engames.presentation.base.adapter.BaseRecyclerAdapter
 
 class GamesAdapter(
-    list: List<GameModel>
+    list: List<GameModel>,
+    private val onClickListener: OnClickListener,
+    private val isRussian: Boolean
 ) : BaseRecyclerAdapter<GameModel, GameViewBinding>(list, GameViewBinding::inflate) {
 
-    override fun onBind(binding: GameViewBinding, item: GameModel) {
-        binding.name.text = item.name
-        binding.description.text = item.description
+    interface OnClickListener{
+        fun click(position: Int)
+    }
+
+    override fun onBind(binding: GameViewBinding, item: GameModel, position: Int) {
+        binding.name.text = if (isRussian) item.name_ru else item.name
+        binding.description.text = if (isRussian) item.description_ru else item.description
+        binding.root.setOnClickListener {
+            onClickListener.click(position)
+        }
     }
 }
