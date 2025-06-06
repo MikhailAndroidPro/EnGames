@@ -32,29 +32,25 @@
             android:id="@+id/en1Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="testtesttesttest" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/en2Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="testtesttesttest" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/en3Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="testtesttesttest" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/en4Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="testtesttesttest" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,29 +68,25 @@
             android:id="@+id/ru1Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="тесттесттесттесттест" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/ru2Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="тесттесттесттесттест" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/ru3Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="тесттесттесттесттест" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/ru4Txt"
             style="@style/TextConnectStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="тесттесттесттесттест" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline

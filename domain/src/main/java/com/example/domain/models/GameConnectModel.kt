@@ -1,12 +1,19 @@
 package com.example.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
+
+@Serializable
+@Parcelize
 data class GameConnectModel(
-    var wordRu0: String,
-    var wordRu1: String,
-    var wordRu2: String,
-    var wordRu3: String,
-    var wordEn0: String,
-    var wordEn1: String,
-    var wordEn2: String,
-    var wordEn3: String
-)
+    var id: Int = 0,
+    var word_ru0: String? = null,
+    var word_ru1: String? = null,
+    var word_ru2: String? = null,
+    var word_ru3: String? = null,
+    var word_en0: String? = null,
+    var word_en1: String? = null,
+    var word_en2: String? = null,
+    var word_en3: String? = null
+) : Parcelable

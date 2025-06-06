@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.models.GameConnectModel
 import com.example.engames.R
+import com.example.engames.data.ResponseState
 import com.example.engames.databinding.FragmentGameConnectBinding
 import com.example.engames.databinding.FragmentProfileBinding
 import com.example.engames.presentation.base.BaseViewModel
@@ -27,6 +28,7 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
     override val viewModel: GameConnectViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getGame2()
     }
     private var correctConnections = 0
 
@@ -34,7 +36,15 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
         super.setObservers()
 
         viewModel.task.observe(viewLifecycleOwner) { task ->
-            setupView(task)
+            when (task) {
+                is ResponseState.Success -> {
+                    setupView(task.data)
+                }
+
+                is ResponseState.Error -> {
+                    showToast(task.message)
+                }
+            }
         }
         viewModel.droppedCount.observe(viewLifecycleOwner) { count ->
             if (count == 4) {
@@ -57,13 +67,13 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
     private fun setupView(task: GameConnectModel) {
         val matchMap = mutableMapOf<String, String>()
         val pairs = listOf(
-            "word0" to (task.wordEn0 to task.wordRu0),
-            "word1" to (task.wordEn1 to task.wordRu1),
-            "word2" to (task.wordEn2 to task.wordRu2),
-            "word3" to (task.wordEn3 to task.wordRu3)
+            "word0" to (task.word_en0 to task.word_ru0),
+            "word1" to (task.word_en1 to task.word_ru1),
+            "word2" to (task.word_en2 to task.word_ru2),
+            "word3" to (task.word_en3 to task.word_ru3)
         ).shuffled()
         pairs.forEach { (tag, pair) ->
-            matchMap[tag] = pair.second
+            matchMap[tag] = pair.second.toString()
         }
         viewModel.matchMap = matchMap
 

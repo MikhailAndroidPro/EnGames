@@ -1,18 +1,12 @@
 package com.example.engames.data.repository
 
 import android.content.Context
+import com.example.domain.models.GameConnectModel
 import com.example.domain.models.GameModel
-import com.example.domain.models.UserProfile
 import com.example.domain.models.enums.Difficulty
-import com.example.engames.R
-import com.example.engames.app.App
-import com.example.engames.data.ResponseState
 import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.exceptions.HttpRequestException
-import io.github.jan.supabase.exceptions.RestException
-import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.from
-import io.ktor.client.plugins.HttpRequestTimeoutException
+import kotlin.random.Random
 
 class GamesRepository(private val supabase: SupabaseClient) {
     suspend fun getGamesList(): List<GameModel> {
@@ -29,8 +23,24 @@ class GamesRepository(private val supabase: SupabaseClient) {
 
     }
 
-    suspend fun getGame2(diff: Difficulty) {
+    suspend fun getGame2(diff: Difficulty) : GameConnectModel {
+        return try {
+            val randomId = when(diff) {
+                Difficulty.Easy -> Random.nextInt(1, 11)
+                Difficulty.Medium -> Random.nextInt(11, 21)
+                Difficulty.Hard -> Random.nextInt(21, 31)
+            }
 
+            val data = supabase.from("Game2")
+                .select {
+                    filter {
+                        eq("id", randomId)
+                    }
+                }.decodeSingle<GameConnectModel>()
+            data
+        } catch (e: Exception) {
+            return GameConnectModel()
+        }
     }
 
     suspend fun getGame3(diff: Difficulty) {
