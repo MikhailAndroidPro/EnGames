@@ -1,6 +1,8 @@
 package com.example.engames.data.repository
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Log
 import com.example.domain.models.FullStatistic
 import com.example.domain.models.FullUser
@@ -14,10 +16,16 @@ import io.github.jan.supabase.exceptions.HttpRequestException
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.storage.storage
+import io.github.jan.supabase.storage.upload
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.serialization.json.buildJsonObject
+import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 class UserRepository(private val supabase: SupabaseClient) {
     suspend fun getUserInfo(uuid: String): UserProfile {
@@ -81,6 +89,65 @@ class UserRepository(private val supabase: SupabaseClient) {
 
     suspend fun changeSettings(themeId: Int, languageId: Int) {
 
+    }
+
+    suspend fun sendPhotoToStorage(
+        context: Context,
+        uri: Uri,
+        uuid: String
+    ): ResponseState<String> {
+        return try {
+            val inputStream = context.contentResolver.openInputStream(uri)
+            val bytes = inputStream?.readBytes()
+
+            if (bytes == null) {
+                return ResponseState.Error(context.getString(R.string.file_read_error))
+            }
+            val fileName =
+                "${SimpleDateFormat("HH.mm.dd.MM.yyyy", Locale.getDefault()).format(Date())}$uuid.png"
+            val bucket = supabase.storage.from("avatars")
+            bucket.upload(path = fileName, data = bytes)
+            val publicUrl = bucket.publicUrl(fileName)
+            ResponseState.Success(publicUrl)
+        } catch (e: RestException) {
+            ResponseState.Error(context.getString(R.string.internet_excepteion))
+        } catch (e: HttpRequestException) {
+            ResponseState.Error(context.getString(R.string.user_not_found))
+        } catch (e: HttpRequestTimeoutException) {
+            ResponseState.Error(context.getString(R.string.timeout_exception))
+        } catch (e: Exception) {
+            ResponseState.Error(context.getString(R.string.exception))
+        }
+    }
+
+    suspend fun sendBitmapToStorage(
+        context: Context,
+        bitmap: Bitmap,
+        uuid: String
+    ): ResponseState<String> {
+        return try {
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val byteArray = stream.toByteArray()
+            stream.close()
+            val fileName =
+                "${SimpleDateFormat("HH.mm.dd.MM.yyyy", Locale.getDefault()).format(Date())}$uuid.png"
+            val bucket = supabase.storage.from("avatars")
+            bucket.upload(
+                path = fileName,
+                data = byteArray
+            )
+            val publicUrl = bucket.publicUrl(fileName)
+            ResponseState.Success(publicUrl)
+        } catch (e: RestException) {
+            ResponseState.Error(context.getString(R.string.internet_excepteion))
+        } catch (e: HttpRequestException) {
+            ResponseState.Error(context.getString(R.string.user_not_found))
+        } catch (e: HttpRequestTimeoutException) {
+            ResponseState.Error(context.getString(R.string.timeout_exception))
+        } catch (e: Exception) {
+            ResponseState.Error(context.getString(R.string.exception))
+        }
     }
 
     suspend fun updateUser(context: Context, user: UserProfile): ResponseState<Unit> {

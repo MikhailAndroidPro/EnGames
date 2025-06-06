@@ -77,4 +77,7 @@
     <string name="correct_word_is">"The correct word is: "</string>
     <string name="you_get">"You get "</string>
     <string name="points">" points!"</string>
+    <string name="file_read_error">File read error</string>
+    <string name="failed_to_load_photo">Failed to load photo</string>
+    <string name="image_loaded">image loaded</string>
 </resources>

@@ -78,4 +78,7 @@
     <string name="correct_word_is">"Правильное слово: "</string>
     <string name="you_get">"Вы набрали "</string>
     <string name="points">" баллов!"</string>
+    <string name="file_read_error">File read error</string>
+    <string name="failed_to_load_photo">Failed to load photo</string>
+    <string name="image_loaded">image loaded</string>
 </resources>

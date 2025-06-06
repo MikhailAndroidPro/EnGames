@@ -2,6 +2,8 @@ package com.example.engames.presentation.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -40,21 +42,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             if (granted) pickFromCamera.launch(null)
         }
 
-    private val pickFromGallery =
-        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            uri?.let {
-                updateImage(it.toString())
-                Log.d("PhotoPicker", "Selected URI: $uri")
-            } ?: Log.d("PhotoPicker", "No media selected")
+    private val pickFromGallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        uri?.let {
+            viewModel.selectedImageUri = it
+            viewModel.selectedBitmap = null
+            updateImage(it.toString())
         }
+    }
 
     private val pickFromCamera =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
             bitmap?.let {
-                Glide.with(binding.userImg).load(bitmap).into(binding.userImg)
+                viewModel.selectedBitmap = it
+                viewModel.selectedImageUri = null
+                Glide.with(binding.userImg).load(it).into(binding.userImg)
                 imageChanged = true
                 checkUserChanges()
-            } ?: Log.d("PhotoPicker", "No media selected")
+            }
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +99,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 is ResponseState.Success -> {
                     currentUserProfile = updatedUser
                     binding.newPasswordEditText.text.clear()
+                    checkUserChanges()
+                }
+
+                is ResponseState.Error -> {
+                    showToast(it.message)
+                }
+            }
+        }
+        viewModel.photo.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseState.Success -> {
+                    imageChanged = false
+                    showToast(resources.getString(R.string.image_loaded))
                     checkUserChanges()
                 }
 
@@ -206,7 +223,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 Gender.entries.first { it.name == binding.genderBtn.text }.value,
                 currentUserProfile.image
             )
-            viewModel.saveUser(context(), updatedUser)
+            viewModel.saveUser(context(), updatedUser, imageChanged)
         }
 
         userImg.setOnClickListener { imagePicker() }
