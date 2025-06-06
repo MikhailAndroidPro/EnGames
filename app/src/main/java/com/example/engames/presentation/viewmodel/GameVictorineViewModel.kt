@@ -24,6 +24,6 @@ class GameVictorineViewModel : BaseViewModel() {
         if (_currentQuestionId.value?.plus(1) == 20) {
             finish()
         }
-        else _currentQuestionId.value = _currentQuestionId.value!!+1
+        else _currentQuestionId.value = _currentQuestionId.value?.plus(1)
     }
 }

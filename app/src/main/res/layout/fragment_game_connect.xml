@@ -1,8 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="24dp"
     tools:context=".presentation.fragment.GameConnectFragment">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/taskTxt"
+        style="@style/TitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/game_connect_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <LinearLayout
+        android:id="@+id/englishColumn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskTxt">
+
+        <TextView
+            android:id="@+id/en1Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testtesttesttest" />
+
+        <TextView
+            android:id="@+id/en2Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testtesttesttest" />
+
+        <TextView
+            android:id="@+id/en3Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testtesttesttest" />
+
+        <TextView
+            android:id="@+id/en4Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testtesttesttest" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rusColumn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/taskTxt">
+
+        <TextView
+            android:id="@+id/ru1Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="тесттесттесттесттест" />
+
+        <TextView
+            android:id="@+id/ru2Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="тесттесттесттесттест" />
+
+        <TextView
+            android:id="@+id/ru3Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="тесттесттесттесттест" />
+
+        <TextView
+            android:id="@+id/ru4Txt"
+            style="@style/TextConnectStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="тесттесттесттесттест" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
+</androidx.constraintlayout.widget.ConstraintLayout>

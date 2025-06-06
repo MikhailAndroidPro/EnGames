@@ -24,6 +24,14 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="TextConnectStyle" parent="EditTextStyle">
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginVertical">8dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:maxLength">18</item>
+    </style>
+
     <style name="RecyclerBase" parent="Theme.EnGames">
         <item name="android:fadingEdgeLength">32dp</item>
         <item name="android:requiresFadingEdge">vertical</item>

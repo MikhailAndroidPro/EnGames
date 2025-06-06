@@ -56,4 +56,5 @@
     <string name="the_word_is">The word is:</string>
     <string name="write_translation_here">write translation here</string>
     <string name="en_digits">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="game_connect_title">Drag words to translation</string>
 </resources>
