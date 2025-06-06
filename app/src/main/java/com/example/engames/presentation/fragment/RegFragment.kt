@@ -2,10 +2,12 @@ package com.example.engames.presentation.fragment
 
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.engames.R
+import com.example.engames.data.ResponseState
 import com.example.engames.databinding.FragmentRegBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.RegViewModel
@@ -98,9 +100,39 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
 
         if (checkData()) {
             createUser()
-            findNavController().popBackStack()
         }
     }
 
+    override fun setObservers() {
+        super.setObservers()
+
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResponseState.Success -> {}
+
+                is ResponseState.Error -> {
+                    showToast(buildString {
+                        append(it.message)
+                        append(resources.getString(R.string.of_register))
+                    })
+                }
+            }
+        }
+        viewModel.stateCreation.observe(viewLifecycleOwner) {
+            when(it) {
+                is ResponseState.Success -> {
+                    showToast(resources.getString(R.string.successfully_registered))
+                    findNavController().popBackStack()
+                }
+
+                is ResponseState.Error -> {
+                    showToast(buildString {
+                        append(it.message)
+                        append(resources.getString(R.string.of_creation))
+                    })
+                }
+            }
+        }
+    }
 
 }

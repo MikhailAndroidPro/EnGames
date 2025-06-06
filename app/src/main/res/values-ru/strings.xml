@@ -66,4 +66,6 @@
     <string name="successfully_registered">регистрация успешна</string>
     <string name="failed_to_get_user">Не удалось найти пользователя</string>
     <string name="successfully_logout">Выход из аккаунта</string>
+    <string name="of_register"> регистрации</string>
+    <string name="of_creation">" создания"</string>
 </resources>

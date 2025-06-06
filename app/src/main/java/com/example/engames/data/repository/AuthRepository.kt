@@ -41,18 +41,14 @@ class AuthRepository(private val supabase: SupabaseClient) {
     suspend fun signUpUser(
         context: Context,
         email: String,
-        password: String,
-        name: String
+        password: String
     ): ResponseState<Unit> {
         try {
             supabase.auth.signUpWith(Email) {
                 this.email = email
                 this.password = password
-                this.data = buildJsonObject {
-                    put("name", name)
-                }
             }
-            val id = supabase.auth.currentUserOrNull() ?: context.resources.getString(R.string.failed_to_get_user)
+            val id = supabase.auth.currentUserOrNull()?.id ?: context.resources.getString(R.string.failed_to_get_user)
             App.sharedManager.saveUid(id.toString())
 
             return ResponseState.Success(Unit)

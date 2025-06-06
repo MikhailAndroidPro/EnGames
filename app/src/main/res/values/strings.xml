@@ -65,4 +65,6 @@
     <string name="successfully_registered">Successfully registered</string>
     <string name="successfully_logout">Successfully logout</string>
     <string name="failed_to_get_user">Failed to get user</string>
+    <string name="of_register"> of register</string>
+    <string name="of_creation">" of creation"</string>
 </resources>
