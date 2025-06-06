@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.engames.databinding.FragmentGameVictorineBinding
-import com.example.engames.presentation.base.BaseViewModel
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.GameVictorineViewModel
 
@@ -66,11 +65,11 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         with(binding) {
             viewModel.listTask.value?.let {
                 val task = it[id]
-                questionTxt.text = task.question
-                optionAText.text = task.answer1
-                optionBText.text = task.answer2
-                optionCText.text = task.answer3
-                optionDText.text = task.answer4
+                questionTxt.text = task.task
+                optionAText.text = task.answer0
+                optionBText.text = task.answer1
+                optionCText.text = task.answer2
+                optionDText.text = task.answer3
                 optionA.performClick()
 
                 questionNumTxt.text = buildString {
@@ -86,7 +85,7 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         super.applyClick()
         with(binding) {
             answerButton.setOnClickListener {
-                if (viewModel.listTask.value?.get(viewModel.currentQuestionId.value)?.correctAnswerId == getSelectedOption()) {
+                if (viewModel.listTask.value?.get(viewModel.currentQuestionId.value)?.correct_answer_id == getSelectedOption()) {
                     correctAnswers++
                 }
                 viewModel.nextQuestion()

@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.domain.models.GameChoiceTask
+import com.example.engames.R
+import com.example.engames.data.ResponseState
 import com.example.engames.databinding.FragmentGameChoiceBinding
-import com.example.engames.presentation.base.BaseViewModel
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.GameChoiceViewModel
 
@@ -13,13 +15,16 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
     FragmentGameChoiceBinding::inflate
 ) {
     override val viewModel: GameChoiceViewModel by viewModels()
+    private lateinit var currentTask: GameChoiceTask
     private var position: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTextViewToggleGroup()
         position = arguments?.getInt("gamePosition")!!
+        viewModel.getGame(position)
     }
+
     private fun setupTextViewToggleGroup() {
         val buttons = listOf(
             binding.optionA,
@@ -36,6 +41,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
         }
         binding.optionA.isSelected = true
     }
+
     private fun getSelectedOption(): Int {
         return when {
             binding.optionA.isSelected -> 0
@@ -50,10 +56,9 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
         super.applyClick()
         with(binding) {
             answerButton.setOnClickListener {
-                if (viewModel.task.value?.correctAnswerId == getSelectedOption()){
+                if (currentTask.correct_answer_id == getSelectedOption()) {
                     win()
-                }
-                else lose()
+                } else lose()
             }
         }
     }
@@ -61,31 +66,49 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
     override fun setObservers() {
         super.setObservers()
 
-        viewModel.isTaskReady.observe(viewLifecycleOwner) { it ->
-            if (it) {
-                setupView()
+        viewModel.task.observe(viewLifecycleOwner) { task ->
+            when (task) {
+                is ResponseState.Success -> {
+                    setupView(task.data)
+                }
+
+                is ResponseState.Error -> {
+                    showToast(task.message)
+                }
             }
         }
     }
 
-    private fun setupView() {
+    private fun setupView(data: GameChoiceTask) {
         with(binding) {
-            viewModel.task.value?.let {
-                questionTxt.text = it.question
-                optionAText.text = it.answer1
-                optionBText.text = it.answer2
-                optionCText.text = it.answer3
-                optionDText.text = it.answer4
+            currentTask = data
+            val gameTask =
+                if (position == 0) resources.getString(R.string.select_translation)
+                else resources.getString(
+                    R.string.select_wrong
+                )
+            data.let {
+                questionTxt.text = buildString {
+                    append(gameTask)
+                    append(it.task?.replaceFirstChar { char -> char.uppercase() })
+                }
+                optionAText.text = it.answer0
+                optionBText.text = it.answer1
+                optionCText.text = it.answer2
+                optionDText.text = it.answer3
             }
         }
     }
 
     fun win() {
         viewModel.win()
+        showToast(resources.getString(R.string.you_won))
         findNavController().popBackStack()
     }
+
     fun lose() {
         viewModel.lose()
+        showToast(resources.getString(R.string.you_lose))
         findNavController().popBackStack()
     }
 }

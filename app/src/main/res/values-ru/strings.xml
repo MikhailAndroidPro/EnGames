@@ -70,4 +70,8 @@
     <string name="of_creation">" создания"</string>
     <string name="cant_delete_account">Не удалось удалить аккаунт</string>
     <string name="cant_logout">Не удалось выйти из аккаунта</string>
+    <string name="you_won">Вы выиграли!</string>
+    <string name="you_lose">Вы проиграли(</string>
+    <string name="select_translation">"Выбери перевод слова:\n"</string>
+    <string name="select_wrong">"Выбери слово не по теме:\n"</string>
 </resources>

@@ -22,8 +22,8 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
 
     override fun click(position: Int) {
         when(position) {
-            1 -> findNavController().navigate(R.id.action_gamesFragment_to_gameConnectFragment)
-            2 -> findNavController().navigate(R.id.action_gamesFragment_to_gameEnterFragment)
+            1 -> findNavController().navigate(R.id.action_gamesFragment_to_gameEnterFragment)
+            2 -> findNavController().navigate(R.id.action_gamesFragment_to_gameConnectFragment)
             4 -> findNavController().navigate(R.id.action_gamesFragment_to_gameVictorineFragment)
             else -> {
                 val bundle = bundleOf("gamePosition" to position)
@@ -64,7 +64,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
     }
 
     fun setRecyclerViewAdapter(list: List<GameModel>) {
-        binding.rvGames.adapter = GamesAdapter(list, this, App.settingsManager.getCurrentLanguage() == "ru")
+        binding.rvGames.adapter = GamesAdapter(list.sortedBy { it.id }, this, App.settingsManager.getCurrentLanguage() == "ru")
     }
 
     fun setRecyclerLayoutManager() {

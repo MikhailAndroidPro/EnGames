@@ -60,7 +60,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.splashFragment, R.id.authFragment, R.id.regFragment -> {
+                R.id.splashFragment, R.id.authFragment, R.id.regFragment, R.id.gameEnterFragment,
+                R.id.gameConnectFragment, R.id.gameChoiceFragment , R.id.gameVictorineFragment -> {
                     view.visibility = View.GONE
                 }
                 else -> {

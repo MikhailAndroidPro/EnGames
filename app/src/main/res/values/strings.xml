@@ -67,6 +67,10 @@
     <string name="failed_to_get_user">Failed to get user</string>
     <string name="of_register"> of register</string>
     <string name="of_creation">" of creation"</string>
-    <string name="cant_delete_account">Не удалось удалить аккаунт</string>
-    <string name="cant_logout">Не удалось выйти из аккаунта</string>
+    <string name="cant_delete_account">Failed to delete account</string>
+    <string name="cant_logout">Failed to log out of account</string>
+    <string name="you_won">You Won!</string>
+    <string name="you_lose">You Lose(</string>
+    <string name="select_translation">"Choose translation of word:\n"</string>
+    <string name="select_wrong">"Choose a word that is not on topic:\n"</string>
 </resources>
