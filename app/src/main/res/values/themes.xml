@@ -103,4 +103,16 @@
         <item name="android:maxLines">2</item>
         <item name="android:ellipsize">end</item>
     </style>
+    <style name="CardView.Invert" parent="Theme.EnGames">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="elevation">6dp</item>
+        <item name="cardBackgroundColor">@color/alternativeSecond</item>
+        <item name="android:layout_margin">12dp</item>
+    </style>
+    <style name="CardView.Invert.Title" parent="SubTitleText">
+        <item name="android:textColor">@color/alternativeMain</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">22sp</item>
+    </style>
 </resources>

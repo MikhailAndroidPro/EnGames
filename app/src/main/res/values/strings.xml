@@ -52,4 +52,8 @@
     <string name="allow">Allow</string>
     <string name="cancel">Cancel</string>
     <string name="make_answer">Make answer</string>
+    <string name="game_enter_title">Translate this word</string>
+    <string name="the_word_is">The word is:</string>
+    <string name="write_translation_here">write translation here</string>
+    <string name="en_digits">qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
 </resources>

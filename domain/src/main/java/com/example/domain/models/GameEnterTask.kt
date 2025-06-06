@@ -1,3 +1,6 @@
 package com.example.domain.models
 
-data class GameEnterTask()
+data class GameEnterTask(
+    var question: String,
+    var translation: String
+)

@@ -21,6 +21,7 @@ class GamesFragment : BaseFragment<FragmentGamesBinding>(
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadGames()
         setRecyclerLayoutManager()
+        findNavController().navigate(R.id.action_gamesFragment_to_gameVictorineFragment)
     }
 
     override fun setObservers() {
