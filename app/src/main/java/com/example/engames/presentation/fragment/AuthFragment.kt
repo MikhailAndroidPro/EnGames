@@ -42,7 +42,6 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
     }
 
     private fun authUser() {
-        if (binding.checkboxRememberMe.isChecked) App.sharedManager.logIn()
         viewModel.loginUser(
             context(),
             binding.emailEditText.text.toString(),
@@ -56,6 +55,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
             when (it) {
                 is ResponseState.Success -> {
                     showToast(resources.getString(R.string.successfully_authorized))
+                    if (binding.checkboxRememberMe.isChecked) App.sharedManager.logIn()
                     findNavController ().navigate(R.id.action_authFragment_to_gamesFragment)
                 }
 

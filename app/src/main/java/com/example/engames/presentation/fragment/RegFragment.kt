@@ -111,10 +111,8 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
                 is ResponseState.Success -> {}
 
                 is ResponseState.Error -> {
-                    showToast(buildString {
-                        append(it.message)
-                        append(resources.getString(R.string.of_register))
-                    })
+                    if (it.message == resources.getString(R.string.account_restored)) findNavController().popBackStack()
+                    showToast(it.message)
                 }
             }
         }

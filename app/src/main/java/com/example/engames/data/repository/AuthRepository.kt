@@ -1,6 +1,7 @@
 package com.example.engames.data.repository
 
 import android.content.Context
+import com.example.domain.models.FullUser
 import com.example.engames.R
 import com.example.engames.app.App
 import com.example.engames.data.ResponseState
@@ -26,6 +27,11 @@ class AuthRepository(private val supabase: SupabaseClient) {
                 this.password = password
             }
             val id = supabase.auth.currentUserOrNull()?.id ?: "Failed to get user"
+            if (App.userRepository.isUserDeleted(uuid = id)) return ResponseState.Error(
+                context.resources.getResourceName(
+                    R.string.user_not_found
+                )
+            )
             App.sharedManager.saveUid(id.toString())
             return ResponseState.Success(Unit)
         } catch (e: RestException) {
@@ -44,24 +50,28 @@ class AuthRepository(private val supabase: SupabaseClient) {
         email: String,
         password: String
     ): ResponseState<Unit> {
-        try {
+        return try {
             supabase.auth.signUpWith(Email) {
                 this.email = email
                 this.password = password
             }
             val id = supabase.auth.currentUserOrNull()?.id
-                ?: context.resources.getString(R.string.failed_to_get_user)
-            App.sharedManager.saveUid(id.toString())
+                ?: return ResponseState.Error(context.getString(R.string.failed_to_get_user))
+            App.sharedManager.saveUid(id)
+            ResponseState.Success(Unit)
 
-            return ResponseState.Success(Unit)
         } catch (e: RestException) {
-            return ResponseState.Error(context.resources.getResourceName(R.string.internet_excepteion))
+            if (e.message?.contains("User already registered", ignoreCase = true) == true) {
+                undeleteAccount(context, email)
+                return ResponseState.Error(context.getString(R.string.account_restored))
+            }
+            ResponseState.Error(context.getString(R.string.internet_excepteion))
         } catch (e: HttpRequestException) {
-            return ResponseState.Error(context.resources.getResourceName(R.string.user_not_found))
+            ResponseState.Error(context.getString(R.string.user_not_found))
         } catch (e: HttpRequestTimeoutException) {
-            return ResponseState.Error(context.resources.getResourceName(R.string.timeout_exception))
+            ResponseState.Error(context.getString(R.string.timeout_exception))
         } catch (e: Exception) {
-            return ResponseState.Error(context.resources.getResourceName(R.string.exception))
+            ResponseState.Error(context.getString(R.string.exception))
         }
     }
 
@@ -105,6 +115,23 @@ class AuthRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    suspend fun undeleteAccount(
+        context: Context,
+        email: String
+    ): ResponseState<Unit> {
+        try {
+            val userTable = supabase.from("User")
+            val uuid = userTable
+                .select { filter { eq("email", email) } }
+                .decodeSingle<FullUser>().uuid
+            userTable.update(mapOf("is_deleted" to false)) {
+                filter { eq("uuid", uuid) }
+            }
+            return ResponseState.Success(Unit)
+        } catch (e: Exception) {
+            return ResponseState.Error(context.getString(R.string.exception))
+        }
+    }
     suspend fun deleteAccount(
         context: Context,
     ): ResponseState<Unit> {

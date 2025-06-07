@@ -71,6 +71,21 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    suspend fun isUserDeleted(uuid: String): Boolean {
+        return try {
+            supabase.from("User")
+                .select {
+                    filter {
+                        eq("uuid", uuid)
+                    }
+                }
+                .decodeSingle<FullUser>().is_deleted
+        } catch (e: Exception) {
+            Log.e("User repository", "Failed: ${e.message}")
+            return false
+        }
+    }
+
     suspend fun createUser(
         context: Context,
         uuid: String,
