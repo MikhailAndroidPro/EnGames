@@ -1,0 +1,1 @@
+INSERT INTO "public"."Gender" ("id", "is_male", "name") VALUES ('1', 'true', 'Male'), ('2', 'false', 'Female');

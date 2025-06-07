@@ -1,0 +1,1 @@
+INSERT INTO "public"."Language" ("id", "language_code") VALUES ('1', 'en'), ('2', 'ru');

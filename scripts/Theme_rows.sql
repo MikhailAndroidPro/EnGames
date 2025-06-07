@@ -1,0 +1,1 @@
+INSERT INTO "public"."Theme" ("id", "is_light_theme") VALUES ('1', 'false'), ('2', 'true');
