@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/passwordEditText"
         app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
         app:layout_constraintTop_toTopOf="@+id/passwordEditText"
-        app:tint="@color/white" />
+        style="@style/IconsStyle" />
 
     <ImageView
         android:id="@+id/eyeBtnRepeatPassword"
@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/repeatPasswordEditText"
         app:layout_constraintEnd_toEndOf="@+id/repeatPasswordEditText"
         app:layout_constraintTop_toTopOf="@+id/repeatPasswordEditText"
-        app:tint="@color/white" />
+        style="@style/IconsStyle" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkboxAgreeTermsConditions"
