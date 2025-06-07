@@ -11,6 +11,7 @@ import com.example.engames.databinding.FragmentGameVictorineBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.GameVictorineViewModel
 
+// Fragment for the Victorine game.
 class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
     FragmentGameVictorineBinding::inflate
 ) {
@@ -18,12 +19,14 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
     private var correctAnswers = 0
     private var listQuestions: List<GameChoiceTask> = listOf()
 
+    // Called when the view is created.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTextViewToggleGroup()
         viewModel.getGame5()
     }
 
+    // Sets up the toggle group for the answer options.
     private fun setupTextViewToggleGroup() {
         val buttons = listOf(
             binding.optionA,
@@ -41,6 +44,7 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         binding.optionA.isSelected = true
     }
 
+    // Returns the index of the selected option.
     private fun getSelectedOption(): Int {
         return when {
             binding.optionA.isSelected -> 0
@@ -51,6 +55,7 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         }
     }
 
+    // Sets up observers for LiveData.
     override fun setObservers() {
         super.setObservers()
 
@@ -76,10 +81,12 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         }
     }
 
+    // Handles the case where the list of questions is empty.
     private fun emptyListError() {
 
     }
 
+    // Sets up the view with the current question.
     private fun setupView(id: Int) {
         with(binding) {
             listQuestions.let {
@@ -100,6 +107,7 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         }
     }
 
+    // Handles click events.
     override fun applyClick() {
         super.applyClick()
         with(binding) {
@@ -114,6 +122,7 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         }
     }
 
+    // Finishes the game and shows the end game dialog.
     private fun finish() {
         viewModel.finish(context(), correctAnswers)
         showEndGameDialog(

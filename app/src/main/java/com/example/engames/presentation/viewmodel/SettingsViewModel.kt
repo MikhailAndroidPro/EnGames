@@ -23,6 +23,7 @@ class SettingsViewModel : BaseViewModel(){
     val user: LiveData<ResponseState<UserSettings>> = _user
     var isFirstLaunch = true
 
+    // Fetches the user's settings.
     fun fetchUserSettings() {
         viewModelScope.launch {
             try {
@@ -35,6 +36,7 @@ class SettingsViewModel : BaseViewModel(){
         isFirstLaunch = false
     }
 
+    // Logs out the current user.
     fun logout(context: Context) {
         viewModelScope.launch {
             try {
@@ -52,6 +54,7 @@ class SettingsViewModel : BaseViewModel(){
         }
     }
 
+    // Updates the user's theme and language settings.
     fun updateSettings(context: Context, themeId: Int, languageId: Int) {
         viewModelScope.launch {
             try {
@@ -69,6 +72,7 @@ class SettingsViewModel : BaseViewModel(){
         }
     }
 
+    // Deletes the current user's account.
     fun delete(context: Context) {
         viewModelScope.launch {
             try {
@@ -85,6 +89,7 @@ class SettingsViewModel : BaseViewModel(){
             }
         }
     }
+    // Resumes the state of the ViewModel.
     override fun resumeState() {
 
     }

@@ -8,9 +8,18 @@ import com.example.engames.databinding.LeaderViewBinding
 import com.example.engames.presentation.base.adapter.BaseRecyclerAdapter
 import kotlin.math.min
 
+/**
+ * Adapter for displaying leaderboard items in a RecyclerView.
+ *
+ * @property list List of LeaderboardModel objects.
+ * @property context Context for accessing resources.
+ */
 class LeaderboardAdapter(private val list: List<LeaderboardModel>, private val context: Context) :
     BaseRecyclerAdapter<LeaderboardModel, LeaderViewBinding>(list, LeaderViewBinding::inflate) {
 
+    /**
+     * Binds data to the views in each item.
+     */
     override fun onBind(
         binding: LeaderViewBinding,
         item: LeaderboardModel,
@@ -30,5 +39,8 @@ class LeaderboardAdapter(private val list: List<LeaderboardModel>, private val c
         }
     }
 
+    /**
+     * Returns the number of items to display (max 5).
+     */
     override fun getItemCount(): Int = min(5, list.size)
 }

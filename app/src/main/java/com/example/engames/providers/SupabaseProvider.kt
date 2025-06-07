@@ -11,12 +11,14 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import com.example.engames.BuildConfig
 
+/** Provides Supabase client. */
 object SupabaseProvider {
     private const val URL = BuildConfig.SUPABASE_URL
     private const val KEY = BuildConfig.SUPABASE_KEY
 
     @OptIn(SupabaseInternal::class)
     val client: SupabaseClient by lazy {
+        /** Creates Supabase client. */
         createSupabaseClient(
             supabaseKey = KEY,
             supabaseUrl = URL

@@ -17,6 +17,7 @@ class GameConnectViewModel : BaseViewModel() {
     var matchMap = mutableMapOf<String, String>()
     val droppedCount = MutableLiveData(0)
 
+    // Fetches game data for the connect game type.
     fun getGame2() {
         viewModelScope.launch {
             try {
@@ -28,10 +29,12 @@ class GameConnectViewModel : BaseViewModel() {
         }
     }
 
+    // Resumes the state of the ViewModel.
     override fun resumeState() {
 
     }
 
+    // Finalizes the game, updating user statistics.
     fun finish(context: Context, gameId: Int, correctAnswers: Int) {
         viewModelScope.launch {
             try {

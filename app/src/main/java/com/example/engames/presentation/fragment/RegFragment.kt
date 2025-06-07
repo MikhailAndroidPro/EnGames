@@ -13,14 +13,18 @@ import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.RegViewModel
 import kotlinx.coroutines.launch
 
-
+// RegFragment is a fragment for user registration.
 class RegFragment : BaseFragment<FragmentRegBinding>(
     FragmentRegBinding::inflate
 ) {
     private var isPasswordHidden = true
     private var isRepeatPasswordHidden = true
+    // viewModel provides data for the fragment.
     override val viewModel: RegViewModel by viewModels()
 
+    /**
+     * applyClick sets click listeners for UI elements.
+     */
     override fun applyClick() {
         super.applyClick()
         with(binding) {
@@ -51,6 +55,9 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
         }
     }
 
+    /**
+     * registerUser handles user registration logic.
+     */
     private fun registerUser() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
@@ -58,6 +65,9 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
         val username = binding.userNameEditText.text.toString()
         val isChecked = binding.checkboxAgreeTermsConditions.isChecked
 
+        /**
+         * checkData validates user input.
+         */
         fun checkData(): Boolean {
             when {
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
@@ -89,6 +99,9 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
             }
         }
 
+        /**
+         * createUser creates a new user account.
+         */
         fun createUser() {
             lifecycleScope.launch {
                 val email = binding.emailEditText.text.toString()
@@ -103,6 +116,9 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
         }
     }
 
+    /**
+     * setObservers observes LiveData objects for changes.
+     */
     override fun setObservers() {
         super.setObservers()
 

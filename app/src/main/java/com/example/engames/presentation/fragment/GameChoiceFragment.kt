@@ -11,20 +11,23 @@ import com.example.engames.databinding.FragmentGameChoiceBinding
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.GameChoiceViewModel
 
+/** Fragment for the choice game. */
 class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
     FragmentGameChoiceBinding::inflate
 ) {
     override val viewModel: GameChoiceViewModel by viewModels()
+
     private lateinit var currentTask: GameChoiceTask
     private var position: Int = 0
 
+    /** Sets up the view and observers. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTextViewToggleGroup()
         position = arguments?.getInt("gamePosition")!!
         viewModel.getGame(position)
     }
-
+    /** Sets up the toggle group for the answer options. */
     private fun setupTextViewToggleGroup() {
         val buttons = listOf(
             binding.optionA,
@@ -41,7 +44,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
         }
         binding.optionA.isSelected = true
     }
-
+    /** Returns the index of the selected option. */
     private fun getSelectedOption(): Int {
         return when {
             binding.optionA.isSelected -> 0
@@ -51,7 +54,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
             else -> 4
         }
     }
-
+    /** Sets up click listeners for the answer button. */
     override fun applyClick() {
         super.applyClick()
         with(binding) {
@@ -62,7 +65,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
             }
         }
     }
-
+    /** Observes LiveData for game task updates. */
     override fun setObservers() {
         super.setObservers()
 
@@ -87,7 +90,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
             }
         }
     }
-
+    /** Sets up the view with game data. */
     private fun setupView(data: GameChoiceTask) {
         with(binding) {
             currentTask = data
@@ -108,7 +111,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
             }
         }
     }
-
+    /** Handles the win condition. */
     fun win() {
         viewModel.win(context(), position, 2)
         showEndGameDialog(
@@ -118,7 +121,7 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
             findNavController().popBackStack()
         }
     }
-
+    /** Handles the lose condition. */
     fun lose() {
         showEndGameDialog(
             resources.getString(R.string.you_lose),

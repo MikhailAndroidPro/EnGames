@@ -34,7 +34,10 @@ import java.util.Locale
 import kotlin.math.max
 import kotlin.reflect.full.memberProperties
 
+/** Manages user data interactions with Supabase. */
 class UserRepository(private val supabase: SupabaseClient) {
+
+    /** Fetches user profile information by UUID. */
     suspend fun getUserInfo(uuid: String): UserProfile {
         return try {
             val data = supabase.from("User")
@@ -58,6 +61,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Fetches user settings (theme and language) by UUID. */
     suspend fun getUserSettings(uuid: String): UserSettings {
         return try {
             val data = supabase.from("User")
@@ -77,6 +81,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Checks if a user is marked as deleted by UUID. */
     suspend fun isUserDeleted(uuid: String): Boolean {
         return try {
             supabase.from("User")
@@ -92,6 +97,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Creates a new user and their initial statistics. */
     suspend fun createUser(
         context: Context,
         uuid: String,
@@ -124,6 +130,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Changes the theme and language settings for the current user. */
     suspend fun changeSettings(
         context: Context,
         themeId: Int,
@@ -154,6 +161,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Uploads a photo (from URI) to Supabase storage and returns its public URL. */
     suspend fun sendPhotoToStorage(
         context: Context,
         uri: Uri,
@@ -188,6 +196,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Uploads a photo (from Bitmap) to Supabase storage and returns its public URL. */
     suspend fun sendBitmapToStorage(
         context: Context,
         bitmap: Bitmap,
@@ -223,6 +232,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Updates user profile information, including password if provided. */
     suspend fun updateUser(context: Context, user: UserProfile): ResponseState<Unit> {
         try {
             val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
@@ -267,6 +277,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Fetches full user statistics by UUID. */
     suspend fun getUserStatistic(uuid: String): FullStatistic {
         return try {
             supabase.from("Statistic")
@@ -282,6 +293,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Fetches the leaderboard data. */
     suspend fun getLeaderBoard(context: Context): List<LeaderboardModel> {
         return try {
             supabase.postgrest.rpc("get_leaderboard")
@@ -292,6 +304,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Updates the user's statistics for a specific game. */
     suspend fun updateUserStatistic(
         context: Context,
         gameId: Int,
@@ -327,6 +340,7 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /** Updates the user's quiz score, storing the maximum achieved. */
     suspend fun updateUserQuizStatistic(context: Context, points: Int): ResponseState<Unit> {
         try {
             val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")

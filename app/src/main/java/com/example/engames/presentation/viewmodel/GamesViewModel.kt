@@ -18,6 +18,7 @@ class GamesViewModel : BaseViewModel() {
     private val _listGames = MutableLiveData<ResponseState<List<GameModel>>>()
     val listGames: LiveData<ResponseState<List<GameModel>>> get() = _listGames
 
+    // Loads the list of games from the repository.
     fun loadGames() {
         viewModelScope.launch {
             try {
@@ -29,6 +30,7 @@ class GamesViewModel : BaseViewModel() {
         }
     }
 
+    // Placeholder for resuming the ViewModel's state.
     override fun resumeState() {
 
     }

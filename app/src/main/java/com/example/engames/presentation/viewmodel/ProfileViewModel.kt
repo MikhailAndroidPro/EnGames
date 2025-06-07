@@ -23,6 +23,9 @@ class ProfileViewModel : BaseViewModel(){
     var selectedImageUri: Uri? = null
     var selectedBitmap: Bitmap? = null
 
+    /**
+     * Fetches the current user's profile information.
+     */
     fun fetchUserProfile() {
         viewModelScope.launch {
             try {
@@ -33,6 +36,10 @@ class ProfileViewModel : BaseViewModel(){
             }
         }
     }
+
+    /**
+     * Saves the user's profile information, potentially updating their profile picture.
+     */
     fun saveUser(context: Context, user: UserProfile, isImageChanged: Boolean) {
         viewModelScope.launch {
             try {
@@ -69,6 +76,9 @@ class ProfileViewModel : BaseViewModel(){
             }
         }
     }
+    /**
+     * Placeholder for resuming ViewModel state, currently does nothing.
+     */
     override fun resumeState() {
 
     }

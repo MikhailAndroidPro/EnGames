@@ -12,13 +12,14 @@ import com.example.engames.R
 import com.example.engames.databinding.ActivityMainBinding
 import com.example.engames.presentation.base.activity.BaseActivity
 
+/** Main entry point and container for app UI. */
 class MainActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge() //
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

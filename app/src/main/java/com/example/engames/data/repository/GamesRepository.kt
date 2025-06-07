@@ -10,7 +10,13 @@ import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
 import kotlin.random.Random
 
+/**
+ * Repository for fetching game data from Supabase.
+ */
 class GamesRepository(private val supabase: SupabaseClient) {
+    /**
+     * Fetches a list of all available games.
+     */
     suspend fun getGamesList(): List<GameModel> {
         return try {
             val data = supabase.from("Games")
@@ -21,6 +27,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /**
+     * Fetches a GameChoiceTask for Game 1 based on difficulty.
+     */
     suspend fun getGame1(diff: Difficulty): GameChoiceTask {
         return try {
             val randomId = when (diff) {
@@ -41,6 +50,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /**
+     * Fetches a GameConnectModel for Game 2 based on difficulty.
+     */
     suspend fun getGame2(diff: Difficulty): GameConnectModel {
         return try {
             val randomId = when (diff) {
@@ -61,6 +73,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /**
+     * Fetches a GameEnterTask for Game 3 based on difficulty.
+     */
     suspend fun getGame3(diff: Difficulty): GameEnterTask {
         return try {
             val randomId = when (diff) {
@@ -81,6 +96,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /**
+     * Fetches a GameChoiceTask for Game 4 based on difficulty.
+     */
     suspend fun getGame4(diff: Difficulty): GameChoiceTask {
         return try {
             val randomId = when (diff) {
@@ -101,6 +119,9 @@ class GamesRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    /**
+     * Fetches a list of GameChoiceTasks for Game 5.
+     */
     suspend fun getGame5(): List<GameChoiceTask> {
         return try {
             val data = supabase.from("Game5")

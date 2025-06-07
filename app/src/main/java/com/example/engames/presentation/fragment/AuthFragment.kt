@@ -13,13 +13,17 @@ import com.example.engames.presentation.base.BaseViewModel
 import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.AuthViewModel
 
-
+/**
+ * Fragment for user authentication.
+ */
 class AuthFragment : BaseFragment<FragmentAuthBinding>(
     FragmentAuthBinding::inflate
 ) {
     private var isPasswordHidden = true
     override val viewModel: AuthViewModel by viewModels()
-
+    /**
+     * Sets up click listeners for UI elements.
+     */
     override fun applyClick() {
         super.applyClick()
         with(binding) {
@@ -40,7 +44,9 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
             }
         }
     }
-
+    /**
+     * Initiates the user authentication process.
+     */
     private fun authUser() {
         viewModel.loginUser(
             context(),
@@ -48,7 +54,9 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(
             binding.passwordEditText.text.toString()
         )
     }
-
+    /**
+     * Sets up observers for LiveData from the ViewModel.
+     */
     override fun setObservers() {
         super.setObservers()
         viewModel.state.observe(viewLifecycleOwner) {

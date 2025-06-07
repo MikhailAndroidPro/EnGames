@@ -19,13 +19,14 @@ class GameChoiceViewModel : BaseViewModel() {
     private val _task = MutableLiveData<ResponseState<GameChoiceTask>>()
     val task: LiveData<ResponseState<GameChoiceTask>> get() = _task
 
+    // Fetches a game based on the provided position.
     fun getGame(position: Int){
         when (position) {
             0 -> getGame1()
             else -> getGame4()
         }
     }
-
+    // Fetches the first game type (Game1) with Easy difficulty.
     private fun getGame1() {
         viewModelScope.launch {
             try {
@@ -36,7 +37,7 @@ class GameChoiceViewModel : BaseViewModel() {
             }
         }
     }
-
+    // Fetches the fourth game type (Game4) with Easy difficulty.
     private fun getGame4() {
         viewModelScope.launch {
             try {
@@ -47,6 +48,7 @@ class GameChoiceViewModel : BaseViewModel() {
             }
         }
     }
+    // Updates user statistics after a game win.
     fun win(context: Context, gameId: Int, points: Int){
         viewModelScope.launch {
             try {
@@ -64,7 +66,7 @@ class GameChoiceViewModel : BaseViewModel() {
             }
         }
     }
-
+    // Resumes the ViewModel's state (currently empty).
     override fun resumeState() {
 
     }

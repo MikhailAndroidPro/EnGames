@@ -19,6 +19,7 @@ class StatisticViewModel : BaseViewModel() {
     private val _user = MutableLiveData<ResponseState<FullStatistic>>()
     val user: LiveData<ResponseState<FullStatistic>> = _user
 
+    // Fetches and updates user statistics.
     fun getUserStatistic(context: Context){
         viewModelScope.launch {
             try {
@@ -31,6 +32,7 @@ class StatisticViewModel : BaseViewModel() {
         }
     }
 
+    // Fetches and updates the leaderboard.
     fun getLeaderBoard(context: Context){
         viewModelScope.launch {
             try {
@@ -42,6 +44,7 @@ class StatisticViewModel : BaseViewModel() {
         }
     }
 
+    // Placeholder for resuming ViewModel state.
     override fun resumeState() {
 
     }

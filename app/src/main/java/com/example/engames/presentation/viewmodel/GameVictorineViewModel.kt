@@ -18,6 +18,7 @@ class GameVictorineViewModel : BaseViewModel() {
     private val _currentQuestionId = MutableLiveData<Int>(0)
     val currentQuestionId: LiveData<Int> get() = _currentQuestionId
 
+    // Fetches the fifth game's tasks.
     fun getGame5() {
         viewModelScope.launch {
             try {
@@ -29,10 +30,12 @@ class GameVictorineViewModel : BaseViewModel() {
         }
     }
 
+    // Resumes the view model's state.
     override fun resumeState() {
 
     }
 
+    // Finishes the game and updates user statistics.
     fun finish(context: Context, correctAnswers: Int) {
         viewModelScope.launch {
             try {
@@ -53,6 +56,7 @@ class GameVictorineViewModel : BaseViewModel() {
         }
     }
 
+    // Moves to the next question or finishes the game.
     fun nextQuestion(context: Context, max: Int, correctAnswers: Int) : Boolean {
         if (_currentQuestionId.value?.plus(1) == max) {
             finish(context, correctAnswers)

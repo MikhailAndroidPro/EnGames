@@ -11,7 +11,13 @@ import com.example.engames.data.ResponseState
 import com.example.engames.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Handles authentication logic.
+ */
 class AuthViewModel : BaseViewModel() {
+    /**
+     * Logs in a user with the provided credentials.
+     */
     fun loginUser(context: Context, email: String, password: String) {
         viewModelScope.launch {
             try {
@@ -29,6 +35,9 @@ class AuthViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * Resumes the view model's state. (Currently no-op)
+     */
     override fun resumeState() {
 
     }

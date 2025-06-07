@@ -28,6 +28,7 @@ import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.ProfileViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+/** Manages user profile display and editing. */
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate),
     TextWatcher {
 
@@ -37,12 +38,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private lateinit var currentUserProfile: UserProfile
     private lateinit var updatedUser: UserProfile
 
+    /** Launches camera permission request. */
     private val cameraPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) pickFromCamera.launch(null)
         }
 
     private val pickFromGallery = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        /** Handles image selection from gallery. */
         uri?.let {
             viewModel.selectedImageUri = it
             viewModel.selectedBitmap = null
@@ -50,8 +53,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-    private val pickFromCamera =
-        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+    private val pickFromCamera = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+            /** Handles image capture from camera. */
             bitmap?.let {
                 viewModel.selectedBitmap = it
                 viewModel.selectedImageUri = null
@@ -61,6 +64,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             }
         }
 
+    /** Initializes view and fetches user profile. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchUserProfile()
@@ -69,6 +73,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.newPasswordEditText.addTextChangedListener(this@ProfileFragment)
     }
 
+    /** Sets up initial view with user data. */
     private fun setupView() = with(binding) {
         Glide.with(userImg)
             .load(currentUserProfile.image)
@@ -80,6 +85,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         if (currentUserProfile.gender == 2) toggleGender()
     }
 
+    /** Observes LiveData for user profile, state, and photo updates. */
     override fun setObservers() {
         super.setObservers()
         viewModel.user.observe(viewLifecycleOwner) { task ->
@@ -122,6 +128,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    /** Checks for changes in user profile and updates save button state. */
     private fun checkUserChanges() {
         val initial = currentUserProfile
         val currentUsername = binding.userNameEditText.text.toString()
@@ -142,6 +149,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    /** Toggles user gender and updates UI. */
     private fun toggleGender() = with(binding.genderBtn) {
         val newGender = if (text == Gender.Male.name) Gender.Female else Gender.Male
         text = newGender.name
@@ -151,6 +159,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         checkUserChanges()
     }
 
+    /** Toggles password visibility in the input field. */
     private fun togglePasswordVisibility() = with(binding) {
         isPasswordHidden = !isPasswordHidden
         eyeBtn.setImageResource(if (isPasswordHidden) R.drawable.eye_close else R.drawable.eye_open)
@@ -159,6 +168,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         newPasswordEditText.setSelection(newPasswordEditText.text.length)
     }
 
+    /** Shows a dialog to choose image source (camera or gallery). */
     private fun imagePicker() {
         val items = arrayOf(getString(R.string.Camera), getString(R.string.gallery))
         MaterialAlertDialogBuilder(context())
@@ -172,6 +182,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             .show()
     }
 
+    /** Updates the displayed user image. */
     private fun updateImage(uri: String) {
         Glide.with(binding.userImg).load(uri)
             .placeholder(R.drawable.user_image_placeholder)
@@ -180,6 +191,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         checkUserChanges()
     }
 
+    /** Checks for camera permission and launches camera if granted. */
     private fun checkCameraPermissionAndLaunch() {
         when {
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
@@ -191,6 +203,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    /** Shows a dialog explaining why camera permission is needed. */
     private fun showPermissionRationaleDialog() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.camera_permission))
@@ -202,6 +215,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             .show()
     }
 
+    /** Sets up click listeners for UI elements. */
     override fun applyClick() = with(binding) {
         super.applyClick()
         genderBtn.setOnClickListener {
@@ -229,7 +243,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         userImg.setOnClickListener { imagePicker() }
     }
 
+    /** Called after text in editable fields changes. */
     override fun afterTextChanged(s: Editable?) = checkUserChanges()
+    /** Called before text in editable fields changes. */
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 }

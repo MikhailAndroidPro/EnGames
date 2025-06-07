@@ -15,6 +15,9 @@ class GameEnterViewModel : BaseViewModel() {
     private val _task = MutableLiveData<ResponseState<GameEnterTask>>()
     val task: LiveData<ResponseState<GameEnterTask>> get() = _task
 
+    /**
+     * Fetches game 3 data with easy difficulty.
+     */
     fun getGame3() {
         viewModelScope.launch {
             try {
@@ -26,10 +29,16 @@ class GameEnterViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * Resumes the ViewModel's state.
+     */
     override fun resumeState() {
 
     }
-    fun win(context: Context, gameId: Int, points: Int){
+    /**
+     * Updates user statistics after a win.
+     */
+    fun win(context: Context, gameId: Int, points: Int) {
         viewModelScope.launch {
             try {
                 val request = App.userRepository.updateUserStatistic(context, gameId, points)

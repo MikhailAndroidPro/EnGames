@@ -14,8 +14,18 @@ import io.github.jan.supabase.postgrest.from
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-
+/**
+ * Repository class for handling authentication-related operations.
+ * @param supabase The Supabase client instance.
+ */
 class AuthRepository(private val supabase: SupabaseClient) {
+    /**
+     * Logs in an existing user.
+     * @param context The application context.
+     * @param email The user's email.
+     * @param password The user's password.
+     * @return A [ResponseState] indicating the success or failure of the operation.
+     */
     suspend fun loginUser(
         context: Context,
         email: String,
@@ -44,7 +54,13 @@ class AuthRepository(private val supabase: SupabaseClient) {
             return ResponseState.Error(context.resources.getResourceName(R.string.exception))
         }
     }
-
+    /**
+     * Signs up a new user.
+     * @param context The application context.
+     * @param email The user's email.
+     * @param password The user's password.
+     * @return A [ResponseState] indicating the success or failure of the operation.
+     */
     suspend fun signUpUser(
         context: Context,
         email: String,
@@ -74,7 +90,11 @@ class AuthRepository(private val supabase: SupabaseClient) {
             ResponseState.Error(context.getString(R.string.exception))
         }
     }
-
+    /**
+     * Logs out the current user.
+     * @param context The application context.
+     * @return A [ResponseState] indicating the success or failure of the operation.
+     */
     suspend fun logout(
         context: Context,
     ): ResponseState<Unit> {
@@ -92,7 +112,13 @@ class AuthRepository(private val supabase: SupabaseClient) {
             return ResponseState.Error(context.resources.getResourceName(R.string.exception))
         }
     }
-
+    /**
+     * Updates the authenticated user's email and/or password.
+     * @param context The application context.
+     * @param newPassword The new password (if changing).
+     * @param newEmail The new email (if changing).
+     * @return A [ResponseState] indicating the success or failure of the operation.
+     */
     suspend fun updateAuthUser(
         context: Context,
         newPassword: String,
@@ -114,7 +140,12 @@ class AuthRepository(private val supabase: SupabaseClient) {
             return ResponseState.Error(context.resources.getResourceName(R.string.exception))
         }
     }
-
+    /**
+     * Undeletes a previously deleted user account.
+     * @param context The application context.
+     * @param email The email of the account to undelete.
+     * @return A [ResponseState] indicating the success or failure of the operation.
+     */
     suspend fun undeleteAccount(
         context: Context,
         email: String
@@ -132,6 +163,11 @@ class AuthRepository(private val supabase: SupabaseClient) {
             return ResponseState.Error(context.getString(R.string.exception))
         }
     }
+    /**
+     * Deletes the current user's account.
+     * @param context The application context.
+     * @return A [ResponseState] indicating the success or failure of the operation.
+     */
     suspend fun deleteAccount(
         context: Context,
     ): ResponseState<Unit> {

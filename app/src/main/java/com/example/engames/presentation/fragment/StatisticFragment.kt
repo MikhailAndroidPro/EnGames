@@ -29,18 +29,34 @@ import java.io.FileOutputStream
 import kotlin.math.max
 import kotlin.math.roundToInt
 
+/**
+ * Fragment to display user statistics and leaderboard.
+ */
 class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
     FragmentStatisticBinding::inflate
 ) {
 
     override val viewModel: StatisticViewModel by viewModels()
 
+    /** Sets up the view, gets user statistics and leaderboard. */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getUserStatistic(context())
         viewModel.getLeaderBoard(context())
     }
 
+    // Unlock screen orientation than fragment shows
+    override fun onResume() {
+        super.onResume()
+        activity().setOrientationUnlocked(true)
+    }
+    // Lock screen orientation than fragment didn't shown
+    override fun onPause() {
+        super.onPause()
+        activity().setOrientationUnlocked(false)
+    }
+
+    /** Applies click listeners, handles share button click. */
     override fun applyClick() = with(binding) {
         super.applyClick()
         shareStatistic.setOnClickListener {
@@ -51,7 +67,7 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
             }
         }
     }
-
+    /** Shares the statistic image. */
     private fun shareStatistic(file: File) {
         val uri: Uri = FileProvider.getUriForFile(
             context(),
@@ -67,7 +83,7 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
             Intent.createChooser(intent, getString(R.string.share_statistic))
         )
     }
-
+    /** Saves the bitmap to cache. */
     private fun saveBitmapToCache(bitmap: Bitmap): File {
         val cachePath = File(context().cacheDir, "images").apply { mkdirs() }
         val file = File(cachePath, "shared_image.png")
@@ -77,13 +93,13 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
         }
         return file
     }
-
+    /** Creates a bitmap from a view. */
     private fun getBitmapFromView(view: View): Bitmap {
         val bitmap = createBitmap(view.width, view.height)
         view.draw(Canvas(bitmap))
         return bitmap
     }
-
+    /** Sets observers for LiveData. */
     override fun setObservers() = with(binding) {
         super.setObservers()
 
@@ -109,14 +125,14 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
             }
         }
     }
-
+    /** Sets up the leaderboard RecyclerView. */
     private fun setupLeaderboard(list: List<LeaderboardModel>) = with(binding) {
         rvLeaderboard.apply {
             layoutManager = LinearLayoutManager(context())
             adapter = LeaderboardAdapter(list, context())
         }
     }
-
+    /** Sets up the radar chart. */
     private fun setupRadar(stat: FullStatistic) = with(binding) {
         val maxVal = max(
             stat.quiz_score,
@@ -155,7 +171,7 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
         }
         shareStatistic.isClickable = true
     }
-
+    /** Creates RadarData for the chart. */
     private fun createRadarData(stat: FullStatistic): RadarData {
         val entries = listOf(
             RadarEntry(stat.game1_rating.toFloat()),
@@ -180,6 +196,7 @@ class StatisticFragment : BaseFragment<FragmentStatisticBinding>(
             setDrawValues(true)
         }
     }
+    /** Animates a view click. */
     private fun animateClick(view: View, onEnd: () -> Unit) {
         view.animate()
             .scaleX(0.9f)

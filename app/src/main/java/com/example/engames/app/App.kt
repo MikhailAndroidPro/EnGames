@@ -8,8 +8,10 @@ import com.example.engames.data.repository.GamesRepository
 import com.example.engames.data.repository.UserRepository
 import com.example.engames.providers.SupabaseProvider
 
+/** Main application class for initializing global components. */
 class App : Application() {
 
+    /** Companion object to hold static instances accessible throughout the app. */
     companion object {
         lateinit var sharedManager: SharedPreferencesManager
         lateinit var settingsManager: SettingsManager
@@ -19,6 +21,7 @@ class App : Application() {
         lateinit var gamesRepository: GamesRepository
     }
 
+    /** Called when the application is starting, before any other objects have been created. */
     override fun onCreate() {
         super.onCreate()
         sharedManager = SharedPreferencesManager(baseContext)

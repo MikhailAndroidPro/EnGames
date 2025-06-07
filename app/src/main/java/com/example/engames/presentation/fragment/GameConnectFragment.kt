@@ -22,19 +22,28 @@ import com.example.engames.presentation.base.fragment.BaseFragment
 import com.example.engames.presentation.viewmodel.GameConnectViewModel
 import okhttp3.internal.concurrent.Task
 
+/**
+ * Fragment for the "Connect Words" game.
+ */
 class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
     FragmentGameConnectBinding::inflate
 ) {
     override val viewModel: GameConnectViewModel by viewModels()
+
+    /**
+     * Initializes the view and fetches game data.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getGame2()
     }
     private var correctConnections = 0
 
+    /**
+     * Observes LiveData from the ViewModel.
+     */
     override fun setObservers() {
         super.setObservers()
-
         viewModel.task.observe(viewLifecycleOwner) { task ->
             when (task) {
                 is ResponseState.Success -> {
@@ -53,6 +62,9 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
         }
     }
 
+    /**
+     * Sets up drag and drop functionality for word pairs.
+     */
     private fun setDragAndDrop() {
         with(binding) {
             for (i in 0 until englishColumn.childCount) {
@@ -64,6 +76,9 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
         }
     }
 
+    /**
+     * Sets up the view with game data.
+     */
     private fun setupView(task: GameConnectModel) {
         val matchMap = mutableMapOf<String, String>()
         val pairs = listOf(
@@ -94,6 +109,9 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
         setDragAndDrop()
     }
 
+    /**
+     * Sets up drag and drop listeners for a specific pair of views.
+     */
     fun setupDragAndDrop(draggableView: View, targetView: View, matchKey: String) {
         draggableView.tag = matchKey
         targetView.tag = matchKey
@@ -145,6 +163,10 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
             }
         }
     }
+
+    /**
+     * Finishes the game, records results, and shows an end-game dialog.
+     */
     private fun finish(){
         viewModel.finish(context(), 2, correctConnections)
         showEndGameDialog(

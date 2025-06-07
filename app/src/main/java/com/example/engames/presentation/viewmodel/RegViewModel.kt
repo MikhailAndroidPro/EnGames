@@ -17,6 +17,9 @@ class RegViewModel : BaseViewModel() {
     private val _stateCreation = MutableLiveData<ResponseState<Unit>>()
     val stateCreation: LiveData<ResponseState<Unit>> = _stateCreation
 
+    /**
+     * Creates a new user in the database.
+     */
     private fun createUser(context: Context, email: String, password: String, name: String) {
         viewModelScope.launch {
             try {
@@ -40,6 +43,9 @@ class RegViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * Registers a new user with email, password, and name.
+     */
     fun registerUser(context: Context, email: String, password: String, name: String) {
         viewModelScope.launch {
             try {
@@ -60,7 +66,9 @@ class RegViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * Resumes the state of the ViewModel.
+     */
     override fun resumeState() {
-
     }
 }

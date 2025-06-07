@@ -21,16 +21,20 @@ import com.github.angads25.toggle.interfaces.OnToggledListener
 import com.github.angads25.toggle.model.ToggleableView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+/** Manages user settings like theme, language, and account actions. */
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     FragmentSettingsBinding::inflate
 ) {
     override val viewModel: SettingsViewModel by viewModels()
 
+    /**
+     * Fetches user settings when the view is created.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchUserSettings()
     }
-
+    /** Sets up click listeners for UI elements. */
     override fun applyClick() {
         super.applyClick()
         with(binding) {
@@ -63,7 +67,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             })
         }
     }
-
+    /** Logs the user out and navigates to the authentication screen. */
     private fun logout() {
         App.sharedManager.logOut()
         val navOptions = NavOptions.Builder()
@@ -72,7 +76,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
         findNavController().navigate(R.id.authFragment, null, navOptions)
     }
-
+    /** Sets the UI based on locally stored settings when there's no internet. */
     private fun setSettingsNoInternet() {
         with(binding) {
             when (App.settingsManager.getCurrentTheme()) {
@@ -85,11 +89,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             }
         }
     }
-
+    /** Initiates the logout process after account deletion. */
     private fun deleteAccount() {
         logout()
     }
-
+    /** Sets the application language to Russian and updates settings. */
     private fun setRussian() {
         val languageCode = resources.getString(R.string.ru).lowercase()
         viewModel.updateSettings(
@@ -99,7 +103,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         )
         activity().setLanguage(languageCode)
     }
-
+    /** Sets the application language to English and updates settings. */
     private fun setEnglish() {
         val languageCode = resources.getString(R.string.en).lowercase()
         viewModel.updateSettings(
@@ -109,7 +113,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         )
         activity().setLanguage(resources.getString(R.string.en).lowercase())
     }
-
+    /** Sets the application theme to dark mode and updates settings. */
     private fun setDarkTheme() {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         when (currentNightMode) {
@@ -124,7 +128,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             App.settingsManager.getLanguageId()
         )
     }
-
+    /** Sets the application theme to light mode and updates settings. */
     private fun setLightTheme() {
         val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         when (currentNightMode) {
@@ -139,7 +143,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             App.settingsManager.getLanguageId()
         )
     }
-
+    /** Observes LiveData for changes in logout, user settings, settings update, and account deletion states. */
     override fun setObservers() {
         super.setObservers()
 
@@ -188,7 +192,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             }
         }
     }
-
+    /** Applies user settings (theme and language) to the UI. */
     private fun setSettings(userSettings: UserSettings) {
         when (userSettings.themeId) {
             1 -> binding.switchTheme.isOn = true
