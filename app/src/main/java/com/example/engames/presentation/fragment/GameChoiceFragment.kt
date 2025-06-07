@@ -77,6 +77,15 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
                 }
             }
         }
+        viewModel.task.observe(viewLifecycleOwner) { task ->
+            when (task) {
+                is ResponseState.Success -> {}
+
+                is ResponseState.Error -> {
+                    showToast(task.message)
+                }
+            }
+        }
     }
 
     private fun setupView(data: GameChoiceTask) {
@@ -101,14 +110,21 @@ class GameChoiceFragment : BaseFragment<FragmentGameChoiceBinding>(
     }
 
     fun win() {
-        viewModel.win()
-        showToast(resources.getString(R.string.you_won))
-        findNavController().popBackStack()
+        viewModel.win(context(), position, 2)
+        showEndGameDialog(
+            resources.getString(R.string.you_won),
+            resources.getString(R.string.keep_up)
+        ) {
+            findNavController().popBackStack()
+        }
     }
 
     fun lose() {
-        viewModel.lose()
-        showToast(resources.getString(R.string.you_lose))
-        findNavController().popBackStack()
+        showEndGameDialog(
+            resources.getString(R.string.you_lose),
+            resources.getString(R.string.try_again)
+        ) {
+            findNavController().popBackStack()
+        }
     }
 }

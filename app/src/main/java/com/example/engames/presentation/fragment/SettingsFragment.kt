@@ -3,6 +3,7 @@ package com.example.engames.presentation.fragment
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -34,7 +35,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         super.applyClick()
         with(binding) {
             deleteAccountBtn.setOnClickListener {
-                MaterialAlertDialogBuilder(context())
+                val dialog = MaterialAlertDialogBuilder(context())
                     .setTitle(resources.getString(R.string.confirmation))
                     .setMessage(resources.getString(R.string.want_delete_account))
                     .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
@@ -45,6 +46,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
                         dialog.dismiss()
                     }
                     .show()
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(context().getColor(R.color.red))
             }
             logOutAccountBtn.setOnClickListener {
                 viewModel.logout(context())

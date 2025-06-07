@@ -86,4 +86,9 @@
     <string name="confirmation">Подтверждение</string>
     <string name="ok">Ок</string>
     <string name="account_restored">Аккаунт восстановлен</string>
+    <string name="try_again">Попробуй снова в следующий раз</string>
+    <string name="keep_up">Продолжай в том же духе!</string>
+    <string name="statistics_not_saved">Неизвестная ошибка\nСтатистика не сохранена</string>
+    <string name="you_guess">Вы угадали </string>
+    <string name="wait_for_record">Уже ждём, когда вы вернётесь и побъёте свой рекорд!</string>
 </resources>

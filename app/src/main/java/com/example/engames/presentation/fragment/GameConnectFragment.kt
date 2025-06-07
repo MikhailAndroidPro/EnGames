@@ -146,7 +146,17 @@ class GameConnectFragment : BaseFragment<FragmentGameConnectBinding>(
         }
     }
     private fun finish(){
-        viewModel.finish(correctConnections)
-        findNavController().popBackStack()
+        viewModel.finish(context(), 2, correctConnections)
+        showEndGameDialog(
+            buildString {
+                append(resources.getString(R.string.you_guess))
+                append(" ")
+                append(correctConnections)
+                append("!")
+            },
+            if (correctConnections < 4) resources.getString(R.string.try_again) else resources.getString(R.string.keep_up)
+        ) {
+            findNavController().popBackStack()
+        }
     }
 }

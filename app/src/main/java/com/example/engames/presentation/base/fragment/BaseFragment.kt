@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.example.engames.R
 import com.example.engames.presentation.base.BaseViewModel
 import com.example.engames.presentation.base.activity.BaseActivity
-import com.example.engames.presentation.viewmodel.RegViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 abstract class BaseFragment<VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -45,6 +45,23 @@ abstract class BaseFragment<VB : ViewBinding>(
 
     protected fun showToast(@StringRes resId: Int) {
         Toast.makeText(requireContext(), getString(resId), Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showEndGameDialog(
+        title: String,
+        message: String,
+        onConfirm: () -> Unit,
+    ) {
+        val dialog = MaterialAlertDialogBuilder(context())
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+                onConfirm()
+                dialog.dismiss()
+            }
+            .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(context().getColor(R.color.red))
     }
 
     override fun onDestroyView() {

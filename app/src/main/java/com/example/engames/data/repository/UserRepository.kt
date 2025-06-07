@@ -27,6 +27,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
+import kotlin.math.max
+import kotlin.reflect.full.memberProperties
 
 class UserRepository(private val supabase: SupabaseClient) {
     suspend fun getUserInfo(uuid: String): UserProfile {
@@ -250,7 +252,56 @@ class UserRepository(private val supabase: SupabaseClient) {
 
     }
 
-    suspend fun updateUserStatistic(uuid: String) {
+    suspend fun updateUserStatistic(context: Context, gameId: Int, points: Int): ResponseState<Unit> {
+        try {
+            val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
+            val statTable = supabase.from("Statistic")
+            val oldStatistic = statTable.select {
+                filter {
+                    eq("uuid", uid)
+                }
+            }.decodeSingle<FullStatistic>()
+            val propertyName = "game${gameId+1}_rating"
+            val kClass = FullStatistic::class
+            val property = kClass.memberProperties.firstOrNull { it.name == propertyName }
+            val oldRating = property?.getter?.call(oldStatistic) as? Int ?: 0
+            statTable.update({
+                set(propertyName, oldRating + points)
+                set("last_entrance", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+            }) {
+                select()
+                filter {
+                    eq("uuid", uid)
+                }
+            }
+            return ResponseState.Success(Unit)
+        } catch (e: Exception) {
+            return ResponseState.Error(context.getString(R.string.statistics_not_saved))
+        }
+    }
 
+    suspend fun updateUserQuizStatistic(context: Context, points: Int): ResponseState<Unit> {
+        try {
+            val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
+            val statTable = supabase.from("Statistic")
+            val oldMax = statTable.select {
+                filter {
+                    eq("uuid", uid)
+                }
+            }.decodeSingle<FullStatistic>().quiz_score
+            val newScore = max(oldMax, points)
+            statTable.update({
+                set("quiz_score", newScore)
+                set("last_entrance", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+            }) {
+                select()
+                filter {
+                    eq("uuid", uid)
+                }
+            }
+            return ResponseState.Success(Unit)
+        } catch (e: Exception) {
+            return ResponseState.Error(context.getString(R.string.statistics_not_saved))
+        }
     }
 }

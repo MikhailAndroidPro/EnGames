@@ -104,21 +104,28 @@ class GameVictorineFragment : BaseFragment<FragmentGameVictorineBinding>(
         super.applyClick()
         with(binding) {
             answerButton.setOnClickListener {
-                if (listQuestions[viewModel.currentQuestionId.value ?: 0].correct_answer_id == getSelectedOption()) {
+                if (listQuestions[viewModel.currentQuestionId.value
+                        ?: 0].correct_answer_id == getSelectedOption()
+                ) {
                     correctAnswers++
                 }
-                if (viewModel.nextQuestion(listQuestions.size)) finish()
+                if (viewModel.nextQuestion(context(), listQuestions.size, correctAnswers)) finish()
             }
         }
     }
 
     private fun finish() {
-        viewModel.finish()
-        showToast(buildString {
-            append(resources.getString(R.string.you_get))
-            append(correctAnswers)
-            append(resources.getString(R.string.points))
-        })
-        findNavController().popBackStack()
+        viewModel.finish(context(), correctAnswers)
+        showEndGameDialog(
+            buildString {
+                append(resources.getString(R.string.you_guess))
+                append(" ")
+                append(correctAnswers)
+                append("!")
+            },
+            resources.getString(R.string.wait_for_record)
+        ) {
+            findNavController().popBackStack()
+        }
     }
 }

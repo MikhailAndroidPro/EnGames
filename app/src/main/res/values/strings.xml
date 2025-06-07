@@ -85,4 +85,9 @@
     <string name="confirmation">Confirmation</string>
     <string name="ok">Ok</string>
     <string name="account_restored">Account restored</string>
+    <string name="try_again">Try again next time</string>
+    <string name="keep_up">Keep up the good work</string>
+    <string name="statistics_not_saved">Unknown exception\nStatistics not saved</string>
+    <string name="you_guess">You guess </string>
+    <string name="wait_for_record">We can\'t wait for you to come back and break your record!</string>
 </resources>

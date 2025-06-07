@@ -45,19 +45,26 @@ class GameEnterFragment : BaseFragment<FragmentGameEnterBinding>(
         else lose()
     }
 
-    private fun win(){
-        viewModel.win()
-        showToast(resources.getString(R.string.you_won))
-        findNavController().popBackStack()
+    private fun win() {
+        viewModel.win(context(), 1, 2)
+        showEndGameDialog(
+            resources.getString(R.string.you_won),
+            resources.getString(R.string.keep_up)
+        ) {
+            findNavController().popBackStack()
+        }
     }
-    private fun lose(){
-        viewModel.lose()
-        showToast(buildString {
-            append(getString(R.string.you_wrong))
-            append(getString(R.string.correct_word_is))
-            append(correctAnswer)
-        })
-        findNavController().popBackStack()
+
+    private fun lose() {
+        showEndGameDialog(
+            resources.getString(R.string.you_wrong),
+            buildString {
+                append(getString(R.string.correct_word_is))
+                append(correctAnswer)
+            }
+        ) {
+            findNavController().popBackStack()
+        }
     }
 
     override fun setObservers() {

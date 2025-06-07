@@ -1,5 +1,6 @@
 package com.example.engames.presentation.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -32,13 +33,29 @@ class GameVictorineViewModel : BaseViewModel() {
 
     }
 
-    fun finish(){
+    fun finish(context: Context, correctAnswers: Int) {
+        viewModelScope.launch {
+            try {
+                val request =
+                    App.userRepository.updateUserQuizStatistic(context, correctAnswers)
+                when (request) {
+                    is ResponseState.Success -> {
+                        _state.value = ResponseState.Success(Unit)
+                    }
 
+                    is ResponseState.Error -> {
+                        _state.value = ResponseState.Error(request.message)
+                    }
+                }
+            } catch (e: Exception) {
+                _state.value = ResponseState.Error(e.message.toString())
+            }
+        }
     }
 
-    fun nextQuestion(max: Int) : Boolean {
+    fun nextQuestion(context: Context, max: Int, correctAnswers: Int) : Boolean {
         if (_currentQuestionId.value?.plus(1) == max) {
-            finish()
+            finish(context, correctAnswers)
             return true
         }
         else {

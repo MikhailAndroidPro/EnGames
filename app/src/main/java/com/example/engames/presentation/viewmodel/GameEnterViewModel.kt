@@ -1,5 +1,6 @@
 package com.example.engames.presentation.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -28,10 +29,21 @@ class GameEnterViewModel : BaseViewModel() {
     override fun resumeState() {
 
     }
-    fun win(){
-
-    }
-    fun lose(){
-
+    fun win(context: Context, gameId: Int, points: Int){
+        viewModelScope.launch {
+            try {
+                val request = App.userRepository.updateUserStatistic(context, gameId, points)
+                when (request) {
+                    is ResponseState.Success -> {
+                        _state.value = ResponseState.Success(Unit)
+                    }
+                    is ResponseState.Error -> {
+                        _state.value = ResponseState.Error(request.message)
+                    }
+                }
+            } catch (e: Exception) {
+                _state.value = ResponseState.Error(e.message.toString())
+            }
+        }
     }
 }
