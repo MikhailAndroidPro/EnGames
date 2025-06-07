@@ -161,7 +161,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun imagePicker() {
         val items = arrayOf(getString(R.string.Camera), getString(R.string.gallery))
-        MaterialAlertDialogBuilder(requireContext())
+        MaterialAlertDialogBuilder(context())
             .setTitle(getString(R.string.pick_image_resource))
             .setItems(items) { _, which ->
                 when (which) {

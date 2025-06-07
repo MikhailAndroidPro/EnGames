@@ -85,6 +85,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:hint="@string/coming_soon"
+        android:textAlignment="center"
+        android:enabled="false"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
 

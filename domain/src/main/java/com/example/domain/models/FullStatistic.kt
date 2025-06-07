@@ -15,4 +15,5 @@ data class FullStatistic(
     val game2_rating: Int = 0,
     val game3_rating: Int = 0,
     val game4_rating: Int = 0,
+    var uuid: String
 ) : Parcelable

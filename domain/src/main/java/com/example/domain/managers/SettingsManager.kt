@@ -2,6 +2,7 @@ package com.example.domain.managers
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.domain.models.enums.Language
 import com.example.domain.models.enums.ThemeMode
 import java.util.Locale
 
@@ -25,5 +26,9 @@ class SettingsManager(baseContext: Context) {
 
     fun getCurrentLanguage(): String {
         return sharedManager.loadLanguagePreference() ?: locale.language
+    }
+
+    fun getLanguageId(): Int {
+        return Language.entries.first { sharedManager.loadLanguagePreference() == it.name }.id
     }
 }

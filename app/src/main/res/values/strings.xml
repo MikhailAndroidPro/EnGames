@@ -80,4 +80,9 @@
     <string name="file_read_error">File read error</string>
     <string name="failed_to_load_photo">Failed to load photo</string>
     <string name="image_loaded">image loaded</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="changes_not_save">\nThe changes were not saved</string>
+    <string name="want_delete_account">Are you sure you want to delete your account?</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="ok">Ok</string>
 </resources>

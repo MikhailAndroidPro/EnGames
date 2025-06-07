@@ -78,7 +78,12 @@
     <string name="correct_word_is">"Правильное слово: "</string>
     <string name="you_get">"Вы набрали "</string>
     <string name="points">" баллов!"</string>
-    <string name="file_read_error">File read error</string>
-    <string name="failed_to_load_photo">Failed to load photo</string>
-    <string name="image_loaded">image loaded</string>
+    <string name="file_read_error">Ошибка чтения файла</string>
+    <string name="failed_to_load_photo">Не удалось загрузить изображение</string>
+    <string name="image_loaded">Изображение загружено</string>
+    <string name="coming_soon">В разработке</string>
+    <string name="changes_not_save">\nИзменения не были сохранены</string>
+    <string name="want_delete_account">Вы уверены, что хотите удалить аккаунт?</string>
+    <string name="confirmation">Подтверждение</string>
+    <string name="ok">Ок</string>
 </resources>

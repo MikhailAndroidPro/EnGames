@@ -7,6 +7,7 @@ import android.util.Log
 import com.example.domain.models.FullStatistic
 import com.example.domain.models.FullUser
 import com.example.domain.models.UserProfile
+import com.example.domain.models.UserSettings
 import com.example.domain.models.UserStatistic
 import com.example.engames.R
 import com.example.engames.app.App
@@ -51,6 +52,25 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
+    suspend fun getUserSettings(uuid: String): UserSettings {
+        return try {
+            val data = supabase.from("User")
+                .select {
+                    filter {
+                        eq("uuid", uuid)
+                    }
+                }
+                .decodeSingle<FullUser>()
+            UserSettings(
+                data.theme_id,
+                data.current_language
+            )
+        } catch (e: Exception) {
+            Log.e("User repository", "Failed: ${e.message}")
+            return UserSettings()
+        }
+    }
+
     suspend fun createUser(
         context: Context,
         uuid: String,
@@ -64,17 +84,12 @@ class UserRepository(private val supabase: SupabaseClient) {
                 email = email,
                 username = username,
                 password_hash = passwordHash,
-                theme_id = 2,
+                theme_id = App.settingsManager.getCurrentTheme().id,
                 is_deleted = false
             )
             val lastEntrance = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             supabase.from("User").insert(userData)
-            val statistic =
-                supabase.from("Statistic").insert(FullStatistic(last_entrance = lastEntrance)) {
-                    select()
-                }.decodeSingle<FullStatistic>()
-            val statId = statistic.id
-            supabase.from("UserStatistic").insert(UserStatistic(statistic_id = statId, uuid = uuid))
+            supabase.from("Statistic").insert(FullStatistic(last_entrance = lastEntrance, uuid = userData.uuid))
             ResponseState.Success(Unit)
         } catch (e: RestException) {
             return ResponseState.Error(context.resources.getResourceName(R.string.internet_excepteion))
@@ -87,8 +102,30 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun changeSettings(themeId: Int, languageId: Int) {
-
+    suspend fun changeSettings(context: Context, themeId: Int, languageId: Int) : ResponseState<Unit> {
+        try {
+            val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
+            println("ABOBA " + languageId)
+            supabase.from("User")
+                .update({
+                    set("theme_id", themeId)
+                    set("current_language", languageId)
+                }) {
+                    select()
+                    filter {
+                        eq("uuid", uid)
+                    }
+                }
+            return ResponseState.Success(Unit)
+        } catch (e: RestException) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.internet_excepteion))
+        } catch (e: HttpRequestException) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.user_not_found))
+        } catch (e: HttpRequestTimeoutException) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.timeout_exception))
+        } catch (e: Exception) {
+            return ResponseState.Error(context.resources.getResourceName(R.string.exception))
+        }
     }
 
     suspend fun sendPhotoToStorage(
@@ -175,6 +212,7 @@ class UserRepository(private val supabase: SupabaseClient) {
                     set("email", user.email)
                     set("username", user.username)
                     set("gender_id", user.gender)
+                    set("photo_link", user.image)
                 }) {
                     select()
                     filter {
