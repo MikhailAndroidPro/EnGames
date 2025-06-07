@@ -44,6 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?android:selectableItemBackgroundBorderless"
+                    android:clickable="false"
                     android:src="@drawable/share_arrow" />
             </LinearLayout>
 
@@ -51,14 +52,14 @@
                 android:id="@+id/pbLoadRadar"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:layout_marginVertical="12dp"
                 android:layout_gravity="center"
+                android:layout_marginVertical="12dp"
                 android:theme="@style/ProgressBarStyle" />
 
             <com.github.mikephil.charting.charts.RadarChart
                 android:id="@+id/radarSchema"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:layout_marginTop="12dp"
                 android:background="@color/alternativeMain"
                 android:visibility="gone" />
@@ -74,8 +75,8 @@
                 android:id="@+id/pbLoadLeaderboard"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:layout_marginVertical="12dp"
                 android:layout_gravity="center"
+                android:layout_marginVertical="12dp"
                 android:theme="@style/ProgressBarStyle" />
 
             <androidx.recyclerview.widget.RecyclerView

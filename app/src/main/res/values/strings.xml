@@ -91,4 +91,5 @@
     <string name="you_guess">You guess </string>
     <string name="wait_for_record">We can\'t wait for you to come back and break your record!</string>
     <string name="leaderboard">Leaderboard</string>
+    <string name="share_statistic">Share Statistic</string>
 </resources>
