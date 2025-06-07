@@ -53,8 +53,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.switchbutton.library)
+    
     implementation(libs.philjay.mpandroidchart)
     implementation(libs.glide)
     implementation(project(":domain"))

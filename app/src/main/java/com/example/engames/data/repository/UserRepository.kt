@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.domain.models.FullStatistic
 import com.example.domain.models.FullUser
+import com.example.domain.models.LeaderboardModel
 import com.example.domain.models.UserProfile
 import com.example.domain.models.UserSettings
 import com.example.domain.models.UserStatistic
@@ -16,7 +17,10 @@ import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.exceptions.HttpRequestException
 import io.github.jan.supabase.exceptions.RestException
 import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.gotrue.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.rpc
 import io.github.jan.supabase.storage.storage
 import io.github.jan.supabase.storage.upload
 import io.ktor.client.plugins.HttpRequestTimeoutException
@@ -106,7 +110,8 @@ class UserRepository(private val supabase: SupabaseClient) {
             )
             val lastEntrance = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
             supabase.from("User").insert(userData)
-            supabase.from("Statistic").insert(FullStatistic(last_entrance = lastEntrance, uuid = userData.uuid))
+            supabase.from("Statistic")
+                .insert(FullStatistic(last_entrance = lastEntrance, uuid = userData.uuid))
             ResponseState.Success(Unit)
         } catch (e: RestException) {
             return ResponseState.Error(context.resources.getResourceName(R.string.internet_excepteion))
@@ -119,7 +124,11 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun changeSettings(context: Context, themeId: Int, languageId: Int) : ResponseState<Unit> {
+    suspend fun changeSettings(
+        context: Context,
+        themeId: Int,
+        languageId: Int
+    ): ResponseState<Unit> {
         try {
             val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
             println("ABOBA " + languageId)
@@ -158,7 +167,12 @@ class UserRepository(private val supabase: SupabaseClient) {
                 return ResponseState.Error(context.getString(R.string.file_read_error))
             }
             val fileName =
-                "${SimpleDateFormat("HH.mm.dd.MM.yyyy", Locale.getDefault()).format(Date())}$uuid.png"
+                "${
+                    SimpleDateFormat(
+                        "HH.mm.dd.MM.yyyy",
+                        Locale.getDefault()
+                    ).format(Date())
+                }$uuid.png"
             val bucket = supabase.storage.from("avatars")
             bucket.upload(path = fileName, data = bytes)
             val publicUrl = bucket.publicUrl(fileName)
@@ -185,7 +199,12 @@ class UserRepository(private val supabase: SupabaseClient) {
             val byteArray = stream.toByteArray()
             stream.close()
             val fileName =
-                "${SimpleDateFormat("HH.mm.dd.MM.yyyy", Locale.getDefault()).format(Date())}$uuid.png"
+                "${
+                    SimpleDateFormat(
+                        "HH.mm.dd.MM.yyyy",
+                        Locale.getDefault()
+                    ).format(Date())
+                }$uuid.png"
             val bucket = supabase.storage.from("avatars")
             bucket.upload(
                 path = fileName,
@@ -248,11 +267,36 @@ class UserRepository(private val supabase: SupabaseClient) {
         }
     }
 
-    suspend fun getUserStatistic(uuid: String) {
-
+    suspend fun getUserStatistic(uuid: String): FullStatistic {
+        return try {
+            supabase.from("Statistic")
+                .select {
+                    filter {
+                        eq("uuid", uuid)
+                    }
+                }
+                .decodeSingle<FullStatistic>()
+        } catch (e: Exception) {
+            Log.e("User repository", "Failed: ${e.message}")
+            return FullStatistic()
+        }
     }
 
-    suspend fun updateUserStatistic(context: Context, gameId: Int, points: Int): ResponseState<Unit> {
+    suspend fun getLeaderBoard(context: Context): List<LeaderboardModel> {
+        return try {
+            supabase.postgrest.rpc("get_leaderboard")
+                .decodeList<LeaderboardModel>()
+        } catch (e: Exception) {
+            Log.e("User repository", "Failed: ${e.message}")
+            emptyList()
+        }
+    }
+
+    suspend fun updateUserStatistic(
+        context: Context,
+        gameId: Int,
+        points: Int
+    ): ResponseState<Unit> {
         try {
             val uid = App.sharedManager.getUid() ?: return ResponseState.Error("UID not found")
             val statTable = supabase.from("Statistic")
@@ -261,13 +305,16 @@ class UserRepository(private val supabase: SupabaseClient) {
                     eq("uuid", uid)
                 }
             }.decodeSingle<FullStatistic>()
-            val propertyName = "game${gameId+1}_rating"
+            val propertyName = "game${gameId + 1}_rating"
             val kClass = FullStatistic::class
             val property = kClass.memberProperties.firstOrNull { it.name == propertyName }
             val oldRating = property?.getter?.call(oldStatistic) as? Int ?: 0
             statTable.update({
                 set(propertyName, oldRating + points)
-                set("last_entrance", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                set(
+                    "last_entrance",
+                    LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                )
             }) {
                 select()
                 filter {
@@ -292,7 +339,10 @@ class UserRepository(private val supabase: SupabaseClient) {
             val newScore = max(oldMax, points)
             statTable.update({
                 set("quiz_score", newScore)
-                set("last_entrance", LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                set(
+                    "last_entrance",
+                    LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                )
             }) {
                 select()
                 filter {

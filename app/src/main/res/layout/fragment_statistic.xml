@@ -1,30 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.fragment.StatisticFragment"
-    android:paddingHorizontal="24dp">
+    android:paddingHorizontal="24dp"
+    tools:context=".presentation.fragment.StatisticFragment">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/statistic_title"
-        android:theme="@style/TitleText"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fadingEdgeLength="16dp"
+        android:paddingBottom="16dp"
+        android:requiresFadingEdge="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"/>
+        app:layout_constraintTop_toBottomOf="@id/guideline1">
 
-    <ImageView
-        android:id="@+id/shareStatistic"
-        style="@style/IconsStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/share_arrow"
-        app:layout_constraintBottom_toBottomOf="@+id/titleText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/titleText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/statistic_title"
+                    android:textAlignment="textStart"
+                    android:theme="@style/TitleText" />
+
+                <ImageView
+                    android:id="@+id/shareStatistic"
+                    style="@style/IconsStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:src="@drawable/share_arrow" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pbLoadRadar"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginVertical="12dp"
+                android:layout_gravity="center"
+                android:theme="@style/ProgressBarStyle" />
+
+            <com.github.mikephil.charting.charts.RadarChart
+                android:id="@+id/radarSchema"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/alternativeMain"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/SubTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="@string/leaderboard" />
+
+            <ProgressBar
+                android:id="@+id/pbLoadLeaderboard"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginVertical="12dp"
+                android:layout_gravity="center"
+                android:theme="@style/ProgressBarStyle" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLeaderboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

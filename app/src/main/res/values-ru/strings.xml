@@ -91,4 +91,5 @@
     <string name="statistics_not_saved">Неизвестная ошибка\nСтатистика не сохранена</string>
     <string name="you_guess">Вы угадали </string>
     <string name="wait_for_record">Уже ждём, когда вы вернётесь и побъёте свой рекорд!</string>
+    <string name="leaderboard">Таблица Лидеров</string>
 </resources>

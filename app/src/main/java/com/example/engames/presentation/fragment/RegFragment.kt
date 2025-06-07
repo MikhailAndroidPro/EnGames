@@ -75,7 +75,7 @@ class RegFragment : BaseFragment<FragmentRegBinding>(
                     return false
                 }
 
-                username.length < 4 || username.contains(" ") -> {
+                username.length < 4 || username.replace(" ", "").length <= 3 -> {
                     showToast(R.string.username_length_require)
                     return false
                 }
