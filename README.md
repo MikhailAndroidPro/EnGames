@@ -1,4 +1,3 @@
 Данные для входа в приложение: 
 
-Логин - mihail.mozohin@tatar.ru
-Пароль - 123123
+Логин - mihail.mozohin@tatar.ru Пароль - 123123
