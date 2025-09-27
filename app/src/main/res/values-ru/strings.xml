@@ -37,7 +37,8 @@
     <string name="dark">Тьма</string>
     <string name="light">Свет</string>
     <string name="language">Язык</string>
-    <string name="rate_us">Оцените нас в RuStore</string>
+    <string name="rate_us">Оцените нас</string>
+    <string name="rate_us_rustore">Rate us in RuStore</string>
     <string name="share_link">Поделитесь ссылкой с друзьями</string>
     <string name="delete_account">Удалить аккаунт</string>
     <string name="log_out">Выйти</string>
@@ -94,4 +95,6 @@
     <string name="leaderboard">Таблица Лидеров</string>
     <string name="share_statistic">Share Statistic</string>
     <string name="author_name">Мозохин Михаил Александрович</string>
+    <string name="the_game_list_could_t_be_loaded">Не удалось загрузить список игр</string>
+    <string name="your_opinion_is_important">Нам важно ваше мнение</string>
 </resources>

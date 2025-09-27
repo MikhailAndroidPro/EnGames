@@ -36,7 +36,8 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="language">Language</string>
-    <string name="rate_us">Rate us in RuStore</string>
+    <string name="rate_us">Rate us</string>
+    <string name="rate_us_rustore">Rate us in RuStore</string>
     <string name="share_link">Share link with friends</string>
     <string name="delete_account">Delete Account</string>
     <string name="log_out">Log Out</string>
@@ -93,4 +94,6 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="share_statistic">Share Statistic</string>
     <string name="author_name">Мозохин Михаил Александрович</string>
+    <string name="the_game_list_could_t_be_loaded">The game list could\'t be loaded</string>
+    <string name="your_opinion_is_important">Your opinion is important to us</string>
 </resources>

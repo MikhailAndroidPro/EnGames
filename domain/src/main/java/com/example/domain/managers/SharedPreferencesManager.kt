@@ -57,8 +57,15 @@ class SharedPreferencesManager(baseContext: Context) {
         return preferences.getBoolean("isThemeChanged", false)
     }
     // Loads the saved theme preference, defaulting to system theme.
-    fun loadThemePreference(): Int {
-        val themeMode = preferences.getInt("isDarkTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        return themeMode
-    }
+    fun loadThemePreference(): Int = preferences.getInt("isDarkTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+    // Checks is it first opening app for user.
+    fun isFirstOpen(): Boolean = preferences.getBoolean("isFirstOpen", true)
+    // Set isFirstOpen to false
+    fun endFirstOpen() { preferences.edit { putBoolean("isFirstOpen", false) } }
+
+    // Checks is user rate us
+    fun getUserRateUs(): Float = preferences.getFloat("userRate", 0f)
+    // Set user rate
+    fun setUserRate(rate: Float) { preferences.edit { putFloat("userRate", rate) } }
 }
