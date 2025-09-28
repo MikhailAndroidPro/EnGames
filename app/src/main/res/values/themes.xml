@@ -18,7 +18,7 @@
         <item name="android:paddingHorizontal">24dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:paddingVertical">12dp</item>
+        <item name="android:paddingVertical">10dp</item>
         <item name="android:maxLength">24</item>
         <item name="android:lines">1</item>
         <item name="android:maxLines">1</item>
@@ -44,7 +44,7 @@
     </style>
 
     <style name="SubTitleText" parent="Theme.EnGames">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -122,5 +122,10 @@
         <item name="android:textAlignment">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="RateDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerExtraLarge</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/TextAppearance.Material3.BodyMedium</item>
     </style>
 </resources>
